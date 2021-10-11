@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,7 +22,9 @@ public class AuthorityActivity extends AppCompatActivity {
     private boolean hasPermission = false;
     private boolean hasLoginInfo = false;
 
-    private static final int PERMISSION_REQUEST_CODE = 0;
+    private static final int REQUEST_C_CODE = 1;
+    private static final int REQUEST_P_CODE = 2;
+
     private static String C_PERMISSION_PHONE_NUMBER = android.Manifest.permission.READ_PHONE_STATE;
     private static String C_PERMISSION_CAMERA = android.Manifest.permission.CAMERA;
 
@@ -50,15 +53,33 @@ public class AuthorityActivity extends AppCompatActivity {
         btnAllowCamera.setEnabled(true);
         btnAllowPhoneNum.setEnabled(true);
 
-        //Camera
-        if (CheckPermission(this, C_PERMISSION_CAMERA) == true)
-        {
-            btnAllowCamera.setEnabled(false);
-        }
+        SetButtonEnable(C_PERMISSION_CAMERA);
+        SetButtonEnable(C_PERMISSION_PHONE_NUMBER);
+    }
 
-        if (CheckPermission(this,C_PERMISSION_PHONE_NUMBER) == true)
+    private void SetButtonEnable(String permission)
+    {
+        boolean isEnable = false;
+
+        if(permission.isEmpty() == true) return;
+
+        if (permission == C_PERMISSION_CAMERA)
         {
-            btnAllowPhoneNum.setEnabled(false);
+            if (CheckPermission(this,permission) == true)
+            {
+                isEnable = true;
+            }
+
+            btnAllowPhoneNum.setEnabled(isEnable);
+        }
+        else if (permission == C_PERMISSION_PHONE_NUMBER)
+        {
+            if (CheckPermission(this,permission) == true)
+            {
+                isEnable = true;
+            }
+
+            btnAllowPhoneNum.setEnabled(isEnable);
         }
     }
 
@@ -70,11 +91,13 @@ public class AuthorityActivity extends AppCompatActivity {
             {
                 switch (view.getId()) {
                     case R.id.btnAllowCamera:
-
+                        //ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_C_CODE); //권한요청
+                        ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{C_PERMISSION_CAMERA}, REQUEST_C_CODE);
+                        SetButtonEnable(C_PERMISSION_CAMERA);//Set Button enable
                         break;
                     case R.id.btnAllowPhoneNumber:
-                        Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
-                        startActivity(intent);
+                        ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{C_PERMISSION_PHONE_NUMBER}, REQUEST_P_CODE);
+                        SetButtonEnable(C_PERMISSION_PHONE_NUMBER);//Set Button enable
                         break;
                 }
             }
@@ -83,7 +106,6 @@ public class AuthorityActivity extends AppCompatActivity {
         btnAllowCamera.setOnClickListener(Listener);
         btnAllowPhoneNum.setOnClickListener(Listener);
     }
-
 
     private void RestartProgram()
     {
@@ -161,7 +183,7 @@ public class AuthorityActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
+            case REQUEST_P_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     /*..권한이 있는경우 실행할 코드....*/
                 } else {
