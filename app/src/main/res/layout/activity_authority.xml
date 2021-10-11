@@ -15,7 +15,6 @@
         tools:layout_editor_absoluteY="1dp"
         android:gravity="top"
         android:padding="20dp"
-
         >
         <!--*android:background="@color/mainYellow"-->
 
@@ -32,13 +31,14 @@
 
         ``<LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="1dp"
             android:gravity="top"
             android:padding="15dp"
-            >
+            android:layout_weight="1"
+        >
         <TextView
             android:id="@+id/tvUseComment"
             android:layout_width="match_parent"
@@ -87,9 +87,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Allow"
                 android:background="@drawable/button_round_border"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:layout_weight="5"
                 android:gravity="center"
+                android:layout_marginLeft="5dp"
                 />
         </LinearLayout>
 
@@ -132,12 +133,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Allow"
                 android:background="@drawable/button_round_border"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:layout_weight="5"
                 android:gravity="center"
+                android:layout_marginLeft="5dp"
                 />
+            </LinearLayout>
         </LinearLayout>
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/complete"
+            android:textSize="17sp"
+            android:layout_gravity="right"
+            android:textColor="@color/btnFontColorBlue"
+        />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

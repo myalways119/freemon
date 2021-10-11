@@ -16,6 +16,6 @@
     <string name="PhoneNumber">전화번호</string>
     <string name="Camera">카메라</string>
     <string name="AllowCameraComment">사진 업로드를 위해 사용됩니다.</string>
-
+    <string name="complete">완료</string>
     <string name="callFromForm">CALL_FROM_FORM</string>
 </resources>

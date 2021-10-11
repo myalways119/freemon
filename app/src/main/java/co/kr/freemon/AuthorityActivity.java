@@ -14,12 +14,19 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.View;
+import android.widget.Button;
 
 public class AuthorityActivity extends AppCompatActivity {
     private boolean hasPermission = false;
     private boolean hasLoginInfo = false;
 
     private static final int PERMISSION_REQUEST_CODE = 0;
+    private static String C_PERMISSION_PHONE_NUMBER = android.Manifest.permission.READ_PHONE_STATE;
+    private static String C_PERMISSION_CAMERA = android.Manifest.permission.CAMERA;
+
+    Button btnAllowCamera;
+    Button btnAllowPhoneNum;
 
     //요청할 권한들 배열로 선언
     private String[] PERMISSIONS = {
@@ -31,7 +38,52 @@ public class AuthorityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authority);
+
+        InitializeView();
+        SetListener();
     }
+
+    public void InitializeView()
+    {
+        btnAllowCamera = (Button) findViewById(R.id.btnAllowCamera);
+        btnAllowPhoneNum = (Button) findViewById(R.id.btnAllowPhoneNumber);
+        btnAllowCamera.setEnabled(true);
+        btnAllowPhoneNum.setEnabled(true);
+
+        //Camera
+        if (CheckPermission(this, C_PERMISSION_CAMERA) == true)
+        {
+            btnAllowCamera.setEnabled(false);
+        }
+
+        if (CheckPermission(this,C_PERMISSION_PHONE_NUMBER) == true)
+        {
+            btnAllowPhoneNum.setEnabled(false);
+        }
+    }
+
+    public void SetListener()
+    {
+        View.OnClickListener Listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                switch (view.getId()) {
+                    case R.id.btnAllowCamera:
+
+                        break;
+                    case R.id.btnAllowPhoneNumber:
+                        Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        };
+
+        btnAllowCamera.setOnClickListener(Listener);
+        btnAllowPhoneNum.setOnClickListener(Listener);
+    }
+
 
     private void RestartProgram()
     {
@@ -54,24 +106,40 @@ public class AuthorityActivity extends AppCompatActivity {
         System.exit(0);
     }
 
-    private boolean CheckPermission()
+    /*
+    private boolean CheckPermission(String permission)
     {
         boolean returnValue = false;
 
-        if (checkPermissions(this, PERMISSIONS) == false)
+        if (checkPermissions(this, permission) == false)
         {//권한이 없는 경우
             returnValue = false;
             //Toast.makeText(getApplicationContext(),"앱 사용에 필수적인 권한입니다.\n허용 부탁드립니다." , Toast.LENGTH_LONG).show();
             //ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_CODE); //권한요청
         }
         else
-        {/*..권한이 있는경우 실행할 코드....*/
+        {
             returnValue = true;
         }
 
         return returnValue;
     };
+*/
 
+    public boolean CheckPermission(Context context, String permission)
+    {
+        boolean returnValue = true;
+        if (context != null && permission != null) {
+            if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED)
+            {
+                returnValue = false;
+            }
+        }
+
+        return returnValue;
+    }
+
+/*
     public boolean checkPermissions(Context context, String[] permissionList)
     {
         boolean returnValue = true;
@@ -87,9 +155,9 @@ public class AuthorityActivity extends AppCompatActivity {
 
         return returnValue;
     }
+*/
 
     //권한 요청에 대한 결과 처리
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
