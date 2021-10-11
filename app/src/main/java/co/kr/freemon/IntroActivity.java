@@ -1,9 +1,11 @@
 package co.kr.freemon;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +24,11 @@ public class IntroActivity extends AppCompatActivity {
     private boolean hasPermission = false;
     private boolean hasLoginInfo = false;
 
+    private SharedPreferences pref;
+
+    private String PrefKeyId ="PrefKeyId";
+    private String PrefKeyPw ="PrefKeyPw";
+
     private static final int PERMISSION_REQUEST_CODE = 0;
 
     //요청할 권한들 배열로 선언
@@ -35,6 +42,8 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        Initialize();
+
         if (CheckPermission() == true)
         {//권한 있는 경우
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -45,6 +54,31 @@ public class IntroActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), AuthorityActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void Initialize()
+    {
+        pref = getSharedPreferences("myFile", Activity.MODE_PRIVATE);
+    }
+
+    private boolean DoLogin(String id, String Pw)
+    {
+        boolean returnValue = false;
+
+
+        return returnValue;
+    }
+
+    private String GetValueFromShared(String key)
+    {
+        String returnValue = "" ;
+
+        if (key.isEmpty() != true)
+        {
+            returnValue = pref.getString(key, ""); //key, value(defaults)
+        }
+
+        return returnValue;
     }
 
     private void RestartProgram()

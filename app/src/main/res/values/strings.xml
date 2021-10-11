@@ -18,4 +18,6 @@
     <string name="AllowCameraComment">사진 업로드를 위해 사용됩니다.</string>
     <string name="complete">완료</string>
     <string name="callFromForm">CALL_FROM_FORM</string>
+    <string name="SetAuthority">권한 설정</string>
+
 </resources>

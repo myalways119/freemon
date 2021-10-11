@@ -5,6 +5,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,8 +17,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class AuthorityActivity extends AppCompatActivity {
     private boolean hasPermission = false;
@@ -31,19 +35,32 @@ public class AuthorityActivity extends AppCompatActivity {
     Button btnAllowCamera;
     Button btnAllowPhoneNum;
 
-    //요청할 권한들 배열로 선언
-    private String[] PERMISSIONS = {
-            android.Manifest.permission.READ_PHONE_STATE,
-            android.Manifest.permission.CAMERA
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authority);
 
+        getPhoneNumber();
         InitializeView();
         SetListener();
+
+    }
+
+    private void getPhoneNumber()
+    {
+        TelephonyManager telManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+
+        @SuppressLint("MissingPermission") String  PhoneNum = telManager.getLine1Number();
+        Toast.makeText(this, PhoneNum, Toast.LENGTH_SHORT).show();
+        if(PhoneNum.startsWith("+82")) // 국제번호(+82 10...)로 되어 있을경우 010 으로 변환
+
+        {
+
+            PhoneNum = PhoneNum.replace("+82", "0");
+
+        }
+
+        Toast.makeText(this, PhoneNum, Toast.LENGTH_SHORT).show();
     }
 
     public void InitializeView()
@@ -59,27 +76,20 @@ public class AuthorityActivity extends AppCompatActivity {
 
     private void SetButtonEnable(String permission)
     {
-        boolean isEnable = false;
-
+        boolean hasPermission = false;
         if(permission.isEmpty() == true) return;
 
-        if (permission == C_PERMISSION_CAMERA)
+        if (CheckPermission(this,permission) == true)
         {
-            if (CheckPermission(this,permission) == true)
-            {
-                isEnable = true;
-            }
+            hasPermission = true;
+        }
 
-            btnAllowPhoneNum.setEnabled(isEnable);
+        if (permission == C_PERMISSION_CAMERA) {
+            btnAllowPhoneNum.setEnabled(hasPermission);
         }
         else if (permission == C_PERMISSION_PHONE_NUMBER)
         {
-            if (CheckPermission(this,permission) == true)
-            {
-                isEnable = true;
-            }
-
-            btnAllowPhoneNum.setEnabled(isEnable);
+            btnAllowPhoneNum.setEnabled(hasPermission);
         }
     }
 
@@ -107,15 +117,6 @@ public class AuthorityActivity extends AppCompatActivity {
         btnAllowPhoneNum.setOnClickListener(Listener);
     }
 
-    private void RestartProgram()
-    {
-        PackageManager packageManager = getPackageManager();
-        Intent intent = packageManager.getLaunchIntentForPackage(getPackageName());
-        ComponentName componentName = intent.getComponent();
-        Intent mainIntent = Intent.makeRestartActivityTask(componentName);
-        startActivity(mainIntent);
-        System.exit(0);
-    }
 
     private void ExitProgram() {
         // 종료
@@ -182,10 +183,20 @@ public class AuthorityActivity extends AppCompatActivity {
     //권한 요청에 대한 결과 처리
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_P_CODE:
+        switch (requestCode)
+        {
+            case REQUEST_P_CODE: //Request Authority of Phone Number
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {/*..권한이 있는경우 실행할 코드....*/
+                    btnAllowPhoneNum.setEnabled(false);
+                }
+                else
+                {/*..권한이 없는 경우....*/
+                    btnAllowPhoneNum.setEnabled(true);
+                }
+/*
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    /*..권한이 있는경우 실행할 코드....*/
+
                 } else {
                     // 하나라도 거부한다면.
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -209,7 +220,17 @@ public class AuthorityActivity extends AppCompatActivity {
                                 }
                             });
                     alertDialog.show();
-
+                    }
+*/
+                return;
+            case REQUEST_C_CODE: //Request Authority of Camera
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {/*..권한이 있는경우 실행할 코드....*/
+                    btnAllowCamera.setEnabled(false);
+                }
+                else
+                {/*..권한이 없는 경우....*/
+                    btnAllowCamera.setEnabled(true);
                 }
                 return;
             default:
