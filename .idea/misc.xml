@@ -4,7 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_authority.xml" value="0.1" />
-        <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon/app/src/main/res/layout/activity_authority.xml" value="0.26811594202898553" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_club.xml" value="0.234375" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_intro.xml" value="0.20910890299319643" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_join.xml" value="0.23762375340135958" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_login.xml" value="0.234375" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_main.xml" value="0.234375" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/fragment_join_agreement.xml" value="0.24791666666666667" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/fragment_join_phone_authority.xml" value="0.24791666666666667" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/fragment_join_profile.xml" value="0.24791666666666667" />
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/drawable/button_round_border.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/drawable/corner_border_yellow.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/drawable/corner_round_border.xml" value="0.22083333333333333" />

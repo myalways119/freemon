@@ -21,10 +21,10 @@ import androidx.core.content.ContextCompat;
 
 
 public class IntroActivity extends AppCompatActivity {
+    private SharedPreferences pref;
+
     private boolean hasPermission = false;
     private boolean hasLoginInfo = false;
-
-    private SharedPreferences pref;
 
     private String PrefKeyId ="PrefKeyId";
     private String PrefKeyPw ="PrefKeyPw";
@@ -32,7 +32,8 @@ public class IntroActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 0;
 
     //요청할 권한들 배열로 선언
-    private String[] PERMISSIONS = {
+    private String[] PERMISSIONS =
+    {
             android.Manifest.permission.READ_PHONE_STATE,
             android.Manifest.permission.CAMERA
     };
