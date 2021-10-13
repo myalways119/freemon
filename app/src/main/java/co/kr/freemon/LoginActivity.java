@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     {
         btn_login = (Button) findViewById(R.id.btnLogin);
         btn_join = (Button) findViewById(R.id.btnJoin);
-
     }
 
     public void SetListener()
@@ -36,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
             {
                 switch (view.getId()) {
                     case R.id.btnLogin:
-
+                        //Check Login Information from DB
                         break;
                     case R.id.btnJoin:
                         Intent intent = new Intent(getApplicationContext(), JoinActivity.class);

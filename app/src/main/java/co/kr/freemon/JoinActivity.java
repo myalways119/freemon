@@ -1,9 +1,12 @@
 package co.kr.freemon;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +19,7 @@ public class JoinActivity extends AppCompatActivity {
     Fragment_join_agreement fragAgree;
 
     Button btnNext;
+    String phoneNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class JoinActivity extends AppCompatActivity {
         fragPhoneAuthority = new Fragment_join_phone_authority();
 
         setFragment(0); //프래그먼트 교체
+        phoneNum = GetPhoneNumber();
     }
 
     public void SetListener()
@@ -79,5 +84,20 @@ public class JoinActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    private String GetPhoneNumber()
+    {
+        String returnValue = "";
+        TelephonyManager telManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        @SuppressLint("MissingPermission") String  PhoneNum = telManager.getLine1Number();
+
+        if(PhoneNum.startsWith("+82")) // 국제번호(+82 10...)로 되어 있을경우 010 으로 변환
+        {
+            returnValue = PhoneNum.replace("+82", "0");
+        }
+
+        return returnValue;
+    }
+
 
 }
