@@ -16,13 +16,13 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <FrameLayout
-        android:id="@+id/joing_fragment_frame"
+        android:id="@+id/join_fragment_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"/>
 
     <Button
-        android:id="@+id/btnJoinNext"
+        android:id="@+id/joinActivity_btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/next"
