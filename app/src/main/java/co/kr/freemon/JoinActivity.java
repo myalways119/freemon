@@ -13,6 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthSettings;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
+
+import java.util.concurrent.TimeUnit;
+
 public class JoinActivity extends AppCompatActivity {
     FragmentManager fragManagement;
     FragmentTransaction fragmentTransaction;
@@ -25,6 +34,10 @@ public class JoinActivity extends AppCompatActivity {
     int currentFragment = 0;
     Button btnNext;
     String phoneNum;
+
+    //Firebase Phone Number Authority
+    private FirebaseAuth mAuth;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +58,49 @@ public class JoinActivity extends AppCompatActivity {
         fragPhoneAuthority = new Fragment_join_phone_authority();
         //setFragment(R.id.join_frag_phoneAuthority); //프래그먼트 교체
         phoneNum = GetPhoneNumber();
+
+        //PhoneNumAuthority.testPhoneVerify();
+        //PhoneNumAuthority.testPhoneAutoRetrieve();
+        //PhoneAuthProvider.getInstance().verifyPhoneNumber( "+821035524552", 60, TimeUnit.SECONDS, this, null );
+        testPhoneAutoRetrieve();
+    }
+
+
+    public void testPhoneAutoRetrieve() {
+        // [START auth_test_phone_auto]
+        // The test phone number and code should be whitelisted in the console.
+        String phoneNumber = "+821035524552";
+        String smsCode = "123456";
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuthSettings firebaseAuthSettings = firebaseAuth.getFirebaseAuthSettings();
+
+        Toast.makeText(this.getApplicationContext(),"전화번호 인증1", Toast.LENGTH_SHORT).show();
+
+        // Configure faking the auto-retrieval with the whitelisted numbers.
+        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(firebaseAuth)
+                .setPhoneNumber(phoneNumber)
+                .setTimeout(60L, TimeUnit.SECONDS)
+                .setActivity(this)
+                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(PhoneAuthCredential credential) {
+                        // Instant verification is applied and a credential is directly returned.
+                        // ...
+                        Toast.makeText(null,"인증 완료2", Toast.LENGTH_SHORT).show();
+                    }
+
+                    // [START_EXCLUDE]
+                    @Override
+                    public void onVerificationFailed(FirebaseException e) {
+                        Toast.makeText(null,"인증 완료3", Toast.LENGTH_SHORT).show();
+                    }
+                    // [END_EXCLUDE]
+                })
+                .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+
+        // [END auth_test_phone_auto]
     }
 
     public void SetListener()
@@ -106,6 +162,25 @@ public class JoinActivity extends AppCompatActivity {
 
         return returnValue;
     }
+
+    private void startPhoneNumberVerification(String phoneNumber) {
+        // [START start_phone_auth]
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber(phoneNumber)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this)                 // Activity (for callback binding)
+                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.setLanguageCode("kr");
+        // [END start_phone_auth]
+    }
+
+
+
 
 
 }
