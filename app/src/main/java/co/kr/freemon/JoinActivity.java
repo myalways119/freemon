@@ -2,22 +2,27 @@ package co.kr.freemon;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class JoinActivity extends AppCompatActivity {
     FragmentManager fragManagement;
+    FragmentTransaction fragmentTransaction;
 
     //Fragments
     Fragment_join_profile fragProfile;
     Fragment_join_phone_authority fragPhoneAuthority;
     Fragment_join_agreement fragAgree;
 
+    int currentFragment = 0;
     Button btnNext;
     String phoneNum;
 
@@ -28,6 +33,7 @@ public class JoinActivity extends AppCompatActivity {
 
         InitializeView();
         SetListener();
+        SetFragment(R.id.join_frag_phoneAuthority);
     }
 
     private void InitializeView()
@@ -37,8 +43,7 @@ public class JoinActivity extends AppCompatActivity {
         fragAgree = new Fragment_join_agreement();
         fragProfile = new Fragment_join_profile();
         fragPhoneAuthority = new Fragment_join_phone_authority();
-
-        setFragment(0); //프래그먼트 교체
+        //setFragment(R.id.join_frag_phoneAuthority); //프래그먼트 교체
         phoneNum = GetPhoneNumber();
     }
 
@@ -48,14 +53,15 @@ public class JoinActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                switch (view.getId()) {
+                switch (currentFragment)
+                {
                     case R.id.join_frag_phoneAuthority:
                         //폰 번호 인증한 경우
-                        setFragment(R.id.join_frag_agree);
+                        SetFragment(R.id.join_frag_agree);
                         break;
                     case R.id.join_frag_agree:
                         //동의서 동의 한 경우
-                        setFragment(R.id.join_frag_profile);
+                        SetFragment(R.id.join_frag_profile);
                         break;
                     case R.id.join_frag_profile:
                         //프로필 입력한 경우
@@ -69,7 +75,7 @@ public class JoinActivity extends AppCompatActivity {
         btnNext.setOnClickListener(Listener);
     }
 
-    public void setFragment(int id)
+    public void SetFragment(int id)
     {//프래그먼트를 교체하는 작업을 하는 메소드를 만들었습니다
         switch (id)
         {
@@ -83,6 +89,8 @@ public class JoinActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.join_fragment_frame, fragProfile).commit();
                 break;
         }
+
+        currentFragment = id;
     }
 
     private String GetPhoneNumber()
