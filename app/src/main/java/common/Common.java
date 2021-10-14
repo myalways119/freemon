@@ -1,14 +1,8 @@
-package co.kr.freemon;
+package common;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.telephony.TelephonyManager;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 

@@ -1,8 +1,4 @@
-package co.kr.freemon;
-
-import android.annotation.SuppressLint;
-import android.telephony.TelephonyManager;
-import android.widget.Toast;
+package common;
 
 public class CommonConst {
 

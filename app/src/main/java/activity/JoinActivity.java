@@ -1,11 +1,12 @@
-package co.kr.freemon;
+package activity;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import android.app.Fragment;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -21,6 +22,12 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
+
+import fragment.Fragment_join_agreement;
+import fragment.Fragment_join_phone_authority;
+import fragment.Fragment_join_profile;
+import co.kr.freemon.R;
+
 
 public class JoinActivity extends AppCompatActivity {
     FragmentManager fragManagement;
@@ -62,20 +69,18 @@ public class JoinActivity extends AppCompatActivity {
         //PhoneNumAuthority.testPhoneVerify();
         //PhoneNumAuthority.testPhoneAutoRetrieve();
         //PhoneAuthProvider.getInstance().verifyPhoneNumber( "+821035524552", 60, TimeUnit.SECONDS, this, null );
-        testPhoneAutoRetrieve();
+        //testPhoneAutoRetrieve();
     }
 
 
     public void testPhoneAutoRetrieve() {
         // [START auth_test_phone_auto]
         // The test phone number and code should be whitelisted in the console.
-        String phoneNumber = "+821035524552";
+        String phoneNumber = "+821022234441";
         String smsCode = "123456";
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseAuthSettings firebaseAuthSettings = firebaseAuth.getFirebaseAuthSettings();
-
-        Toast.makeText(this.getApplicationContext(),"전화번호 인증1", Toast.LENGTH_SHORT).show();
 
         // Configure faking the auto-retrieval with the whitelisted numbers.
         PhoneAuthOptions options = PhoneAuthOptions.newBuilder(firebaseAuth)
@@ -96,6 +101,16 @@ public class JoinActivity extends AppCompatActivity {
                         Toast.makeText(null,"인증 완료3", Toast.LENGTH_SHORT).show();
                     }
                     // [END_EXCLUDE]
+
+                    @Override
+                    public void onCodeSent(@NonNull String verificationId,
+                                           @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                        // The SMS verification code has been sent to the provided phone number, we
+                        // now need to ask the user to enter the code and then construct a credential
+                        // by combining the code with a verification ID.
+                        Toast.makeText(null,"인증 완료5", Toast.LENGTH_SHORT).show();
+
+                    }
                 })
                 .build();
         PhoneAuthProvider.verifyPhoneNumber(options);

@@ -1,30 +1,31 @@
-package co.kr.freemon;
+package activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import common.Common;
+import common.CommonConst;
+import co.kr.freemon.R;
+import common.*;
+
 public class AuthorityActivity extends AppCompatActivity {
     private boolean hasPermission = false;
     private boolean hasLoginInfo = false;
+
+    private RecyclerView recyclerview;
 
     Button btnAllowCamera;
     Button btnAllowPhoneNum;
@@ -37,7 +38,25 @@ public class AuthorityActivity extends AppCompatActivity {
 
         InitializeView();
         SetListener();
+
+        recyclerview = findViewById(R.id.recyclerview);
+        recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        List<ExpandableListAdapter.Item> data = new ArrayList<>();  // 데이터를 담을 List
+
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "운동"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "축구"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "농구"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "배구"));
+
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "과목"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "국어"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "영어"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "수학"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "과학"));
+
+        recyclerview.setAdapter(new ExpandableListAdapter(data));
     }
+
 
     public void InitializeView()
     {

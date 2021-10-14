@@ -1,25 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/join_frag_phoneAuthority"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/join_frag_phoneAuthority">
+    android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/join_authPhone_txtTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="폰번호 인증"
-        android:textSize="20dp"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/custom_font_family"
+        android:gravity="left"
+        android:text="@string/joinPhoneNumber"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-    </TextView>
+    <LinearLayout
+        android:id="@+id/joing_authPhone_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/join_authPhone_txtTitle"
+        android:layout_marginTop="20dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp"
+            android:layout_weight="2"
+            >
+            <TextView
+                android:id="@+id/tvAllowPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/PhoneNumber"
+                android:textSize="17sp"
+                android:gravity="left"
+                android:layout_marginBottom="3dp"/>
+            <EditText
+                android:id="@+id/joing_authPhon_editTxtPhoneNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:gravity="left"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAllowPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/AskAuthorityCode"
+            android:background="@drawable/button_round_border"
+            android:textSize="13sp"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btnAuthorityPhonNum"
-        android:layout_width="wrap_content"
+        android:id="@+id/join_authPhone_btnCheckCode"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="398dp" />
+        android:text="@string/do_join"
+        android:background="@drawable/button_round_border"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/joing_authPhone_linearlayout"
+        android:layout_marginTop="20dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
