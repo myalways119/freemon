@@ -43,20 +43,22 @@ public class AuthorityActivity extends AppCompatActivity {
         recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         List<ExpandableListAdapter.Item> data = new ArrayList<>();  // 데이터를 담을 List
 
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "전화"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "회원 가입시 인증을 위해서 사용됩니다."));
+//        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "전화"));
+//        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "회원 가입시 인증을 위해서 사용됩니다."));
 
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "카메라"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "사진 업로드를 위해서 사용 됩니다."));
+        //data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "카메라"));
+        //data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "사진 업로드를 위해서 사용 됩니다."));
 
-        ExpandableListAdapter.Item item = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Places");
+        ExpandableListAdapter.Item item = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "전화");
         item.invisibleChildren = new ArrayList<>();
-        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Kerala"));
-        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Tamil Nadu"));
-        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Karnataka"));
-        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Maharashtra"));
+        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "회원 가입시 인증을 위해서 사용됩니다."));
+
+        ExpandableListAdapter.Item item2 = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "카메라");
+        item.invisibleChildren = new ArrayList<>();
+        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "사진 업로드를 위해서 사용 됩니다."));
 
         data.add(item);
+        data.add(item2);
 
         //recyclerview.setAdapter(new ExpandableListAdapter(data));
 
@@ -164,3 +166,4 @@ public class AuthorityActivity extends AppCompatActivity {
         }
     }
 }
+
