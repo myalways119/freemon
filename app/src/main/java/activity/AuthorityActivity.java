@@ -43,16 +43,22 @@ public class AuthorityActivity extends AppCompatActivity {
         recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         List<ExpandableListAdapter.Item> data = new ArrayList<>();  // 데이터를 담을 List
 
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "운동"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "축구"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "농구"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "배구"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "전화"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "회원 가입시 인증을 위해서 사용됩니다."));
 
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "과목"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "국어"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "영어"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "수학"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "과학"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "카메라"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "사진 업로드를 위해서 사용 됩니다."));
+
+        ExpandableListAdapter.Item item = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Places");
+        item.invisibleChildren = new ArrayList<>();
+        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Kerala"));
+        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Tamil Nadu"));
+        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Karnataka"));
+        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Maharashtra"));
+
+        data.add(item);
+
+        //recyclerview.setAdapter(new ExpandableListAdapter(data));
 
         recyclerview.setAdapter(new ExpandableListAdapter(data));
     }
