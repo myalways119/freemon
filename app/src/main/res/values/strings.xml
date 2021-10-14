@@ -8,8 +8,8 @@
     <string name="id_hit">아이디를 입력해 주세요.</string>
     <string name="password_hit">비밀변호를 입력해 주세요.</string>
     <string name="AuthorityPhoneNumber">전화번호 인증</string>
-    <string name="IntroductionUse">이용안내</string>
-    <string name="IntroductionUseComment">어플을 이용하기 위해서는 아래 권한을 허용해주셔야 합니다.</string>
+    <string name="IntroductionUse">이용 안내</string>
+    <string name="IntroductionUseComment">어플을 이용하기 위해서는 아래 권한을 허용해 주세요.</string>
     <string name="AllowPhoneNumberComment">회원가입시 인증을 위해서만 사용됩니다</string>
     <string name="Allow">허용하기</string>
     <string name="PleaseAllowButtonClick">허용하기 버튼을 눌러주세요.</string>

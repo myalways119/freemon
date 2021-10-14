@@ -15,7 +15,7 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         android:gravity="top"
-        android:paddingTop="80dp"
+        android:paddingTop="50dp"
         android:paddingBottom="80dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:text="@string/IntroductionUse"
             android:textAlignment="center"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:layout_marginBottom="10dp"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="15dp"
             />
 
         <TextView
@@ -39,8 +39,9 @@
             android:layout_height="wrap_content"
             android:text="@string/IntroductionUseComment"
             android:textAlignment="center"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:layout_marginBottom="20dp"
+            android:textColor="@color/black"
             />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -48,125 +49,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-
-        ``<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="1dp"
-            android:gravity="top"
-            android:padding="15dp"
-            android:layout_weight="1"
-        >
-        <TextView
-            android:id="@+id/tvUseComment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/IntroductionUseComment"
-            android:textSize="15sp"
-            android:layout_marginBottom="30dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="1dp"
-            android:layout_marginBottom="20dp"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="1dp"
-                android:layout_weight="2"
-                >
-                <TextView
-                    android:id="@+id/tvAllowPhoneNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/PhoneNumber"
-                    android:textSize="17sp"
-                    android:gravity="left"
-                    android:layout_marginBottom="3dp"/>
-                <TextView
-                    android:id="@+id/tvAllowPhoneNumberComment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/AllowPhoneNumberComment"
-                    android:textSize="13sp"
-                    android:gravity="left"/>
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnAllowPhoneNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/SetAuthority"
-                android:background="@drawable/button_round_border"
-                android:textSize="13sp"
-                android:layout_weight="5"
-                android:gravity="center"
-                android:layout_marginLeft="5dp"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="1dp"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="1dp"
-                android:layout_weight="2"
-                >
-                <TextView
-                    android:id="@+id/tvAllowCamera"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Camera"
-                    android:textSize="17sp"
-                    android:gravity="left"
-                    android:layout_marginBottom="3dp"/>
-                <TextView
-                    android:id="@+id/tvAllowCameraComment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/AllowCameraComment"
-                    android:textSize="13sp"
-                    android:gravity="left"/>
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnAllowCamera"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/SetAuthority"
-                android:background="@drawable/button_round_border"
-                android:textSize="13sp"
-                android:layout_weight="5"
-                android:gravity="center"
-                android:layout_marginLeft="5dp"
-                />
-            </LinearLayout>
-
-
-        </LinearLayout>
-
         <Button
             android:id="@+id/btnAuthorityComplete"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:text="@string/complete"
             android:textSize="17sp"
             android:layout_gravity="right"

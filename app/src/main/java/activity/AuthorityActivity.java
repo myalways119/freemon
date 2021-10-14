@@ -38,37 +38,12 @@ public class AuthorityActivity extends AppCompatActivity {
 
         InitializeView();
         SetListener();
-
-        recyclerview = findViewById(R.id.recyclerview);
-        recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        List<ExpandableListAdapter.Item> data = new ArrayList<>();  // 데이터를 담을 List
-
-//        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "전화"));
-//        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "회원 가입시 인증을 위해서 사용됩니다."));
-
-        //data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "카메라"));
-        //data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "사진 업로드를 위해서 사용 됩니다."));
-
-        ExpandableListAdapter.Item item = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "전화");
-        item.invisibleChildren = new ArrayList<>();
-        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "회원 가입시 인증을 위해서 사용됩니다."));
-
-        ExpandableListAdapter.Item item2 = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "카메라");
-        item.invisibleChildren = new ArrayList<>();
-        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "사진 업로드를 위해서 사용 됩니다."));
-
-        data.add(item);
-        data.add(item2);
-
-        //recyclerview.setAdapter(new ExpandableListAdapter(data));
-
-        recyclerview.setAdapter(new ExpandableListAdapter(data));
     }
 
 
     public void InitializeView()
     {
-        btnAllowCamera = (Button) findViewById(R.id.btnAllowCamera);
+        //btnAllowCamera = (Button) findViewById(R.id.btnAllowCamera);
         btnAllowPhoneNum = (Button) findViewById(R.id.btnAllowPhoneNumber);
         btnComplete = (Button) findViewById(R.id.btnAuthorityComplete);
         btnAllowCamera.setEnabled(true);
@@ -76,6 +51,27 @@ public class AuthorityActivity extends AppCompatActivity {
 
         SetButtonEnable(btnAllowCamera, CommonConst.Permission.PERMISSION_CAMERA);
         SetButtonEnable(btnAllowPhoneNum, CommonConst.Permission.PERMISSION_PHONE_STATE);
+
+        //Recycle View(권한 신청 화면)
+        recyclerview = findViewById(R.id.recyclerview);
+        recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        List<ExpandableListAdapter.Item> data = new ArrayList<>();  // 데이터를 담을 List
+
+        ExpandableListAdapter.Item item = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "전화");
+        item.invisibleChildren = new ArrayList<>();
+        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "회원 가입시 인증을 위해서 사용됩니다."));
+
+        ExpandableListAdapter.Item item2 = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "카메라");
+        item2.invisibleChildren = new ArrayList<>();
+        item2.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "사진 업로드를 위해서 사용 됩니다."));
+
+        data.add(item);
+        data.add(item2);
+
+        recyclerview.setAdapter(new ExpandableListAdapter(data));
+        // End
+
+
     }
 
     public void SetListener()
@@ -85,9 +81,9 @@ public class AuthorityActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 switch (view.getId()) {
-                    case R.id.btnAllowCamera:
-                        ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_CAMERA}, CommonConst.Permission.REQUEST_CAMERA_CODE);
-                        break;
+                    //case R.id.btnAllowCamera:
+                      //  ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_CAMERA}, CommonConst.Permission.REQUEST_CAMERA_CODE);
+//                        break;
                     case R.id.btnAllowPhoneNumber:
                         ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_PHONE_STATE}, CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE);
                         break;

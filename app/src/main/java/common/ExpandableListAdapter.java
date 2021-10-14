@@ -47,16 +47,19 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final Item item = data.get(position);
-        switch (item.type) {
+        switch (item.type)
+        {
             case HEADER:
                 final ListHeaderViewHolder itemController = (ListHeaderViewHolder) holder;
                 itemController.refferalItem = item;
                 itemController.header_title.setText(item.text);
+
                 if (item.invisibleChildren == null) {
-                    itemController.btn_expand_toggle.setImageResource(R.drawable.ic_social);//upper
+                    itemController.btn_expand_toggle.setImageResource(R.drawable.ic_up);//upper
                 } else {
-                    itemController.btn_expand_toggle.setImageResource(R.drawable.ic_social);//downlaod
+                    itemController.btn_expand_toggle.setImageResource(R.drawable.ic_down);//downlaod
                 }
+
                 itemController.btn_expand_toggle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -69,7 +72,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                                 count++;
                             }
                             notifyItemRangeRemoved(pos + 1, count);
-                            itemController.btn_expand_toggle.setImageResource(R.drawable.ic_social);//downlaod
+                            itemController.btn_expand_toggle.setImageResource(R.drawable.ic_down);//downlaod
                         } else {
                             int pos = data.indexOf(itemController.refferalItem);
                             int index = pos + 1;
@@ -78,7 +81,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                                 index++;
                             }
                             notifyItemRangeInserted(pos + 1, index - pos - 1);
-                            itemController.btn_expand_toggle.setImageResource(R.drawable.ic_social); //upper
+                            itemController.btn_expand_toggle.setImageResource(R.drawable.ic_up); //upper
                             item.invisibleChildren = null;
                         }
                     }
@@ -97,7 +100,6 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public int getItemViewType(int position) {
         return data.get(position).type;
     }
-
 
     @Override
     public int getItemCount() {
@@ -123,7 +125,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public ListChildViewHolder(View itemView) {
             super(itemView);
             child_title = (TextView) itemView.findViewById(R.id.child_title);
-            btn =  itemView.findViewById(R.id.btn);
+            //btn =  itemView.findViewById(R.id.btn);
         }
     }
 
@@ -132,10 +134,12 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public String text;
         public List<Item> invisibleChildren;
 
-        public Item() {
+        public Item()
+        {
         }
 
-        public Item(int type, String text) {
+        public Item(int type, String text)
+        {
             this.type = type;
             this.text = text;
         }

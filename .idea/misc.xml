@@ -6,7 +6,9 @@
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/button_round_border.xml" value="0.19947916666666668" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/corner_round_border.xml" value="0.19947916666666668" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19947916666666668" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_authority.xml" value="0.10455445149659821" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/ic_social.xml" value="0.38229166666666664" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/ic_up_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_authority.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_club.xml" value="0.234375" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_intro.xml" value="0.20910890299319643" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_join.xml" value="0.16158415231292453" />
@@ -17,8 +19,8 @@
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/fragment_join_profile.xml" value="0.24791666666666667" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/list_child.xml" value="0.18333333333333332" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/list_header.xml" value="0.18333333333333332" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/recyclerview_list_child.xml" value="0.1" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/recycleview_list_header.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/recyclerview_list_child.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/recycleview_list_header.xml" value="0.33" />
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/drawable/button_round_border.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/drawable/corner_border_yellow.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/drawable/corner_round_border.xml" value="0.22083333333333333" />
@@ -36,6 +38,9 @@
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/menu/toolbar_main_menu.xml" value="0.3145833333333333" />
       </map>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_up.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
