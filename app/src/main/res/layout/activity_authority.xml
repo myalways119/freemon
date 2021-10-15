@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context="activity.LoginActivity">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,8 +15,8 @@
         android:gravity="top"
         android:paddingTop="50dp"
         android:paddingBottom="80dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         >
         <!--*android:background="@color/mainYellow"-->
 
@@ -47,16 +45,19 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btnAuthorityComplete"
+            android:id="@+id/auth_btnAllow"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:text="@string/complete"
+            android:text="@string/Allow"
             android:textSize="17sp"
             android:layout_gravity="right"
             android:background="@drawable/button_round_border"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+
         />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

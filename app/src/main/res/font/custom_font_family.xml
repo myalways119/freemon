@@ -20,6 +20,4 @@
         app:font="@font/nanumbarungothicbold"
         app:fontStyle="normal"
         app:fontWeight="1000" />
-
-
 </font-family>

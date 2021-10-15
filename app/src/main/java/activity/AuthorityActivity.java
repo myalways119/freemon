@@ -26,10 +26,7 @@ public class AuthorityActivity extends AppCompatActivity {
     private boolean hasLoginInfo = false;
 
     private RecyclerView recyclerview;
-
-    Button btnAllowCamera;
-    Button btnAllowPhoneNum;
-    Button btnComplete;
+    Button btnAllow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,38 +37,28 @@ public class AuthorityActivity extends AppCompatActivity {
         SetListener();
     }
 
-
     public void InitializeView()
     {
-        //btnAllowCamera = (Button) findViewById(R.id.btnAllowCamera);
-        btnAllowPhoneNum = (Button) findViewById(R.id.btnAllowPhoneNumber);
-        btnComplete = (Button) findViewById(R.id.btnAuthorityComplete);
-        btnAllowCamera.setEnabled(true);
-        btnAllowPhoneNum.setEnabled(true);
-
-        SetButtonEnable(btnAllowCamera, CommonConst.Permission.PERMISSION_CAMERA);
-        SetButtonEnable(btnAllowPhoneNum, CommonConst.Permission.PERMISSION_PHONE_STATE);
+        btnAllow = (Button) findViewById(R.id.auth_btnAllow);
 
         //Recycle View(권한 신청 화면)
         recyclerview = findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         List<ExpandableListAdapter.Item> data = new ArrayList<>();  // 데이터를 담을 List
 
-        ExpandableListAdapter.Item item = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "전화");
+        ExpandableListAdapter.Item item = new ExpandableListAdapter.Item(ExpandableListAdapter.Icon.phone, ExpandableListAdapter.HEADER, "전화");
         item.invisibleChildren = new ArrayList<>();
-        item.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "회원 가입시 인증을 위해서 사용됩니다."));
+        item.invisibleChildren.add(new ExpandableListAdapter.Item(null, ExpandableListAdapter.CHILD, "회원 가입시 인증을 위해서 사용됩니다."));
 
-        ExpandableListAdapter.Item item2 = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "카메라");
+        ExpandableListAdapter.Item item2 = new ExpandableListAdapter.Item(ExpandableListAdapter.Icon.camera, ExpandableListAdapter.HEADER, "카메라");
         item2.invisibleChildren = new ArrayList<>();
-        item2.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "사진 업로드를 위해서 사용 됩니다."));
+        item2.invisibleChildren.add(new ExpandableListAdapter.Item(null, ExpandableListAdapter.CHILD, "사진 업로드를 위해서 사용 됩니다."));
 
         data.add(item);
         data.add(item2);
 
         recyclerview.setAdapter(new ExpandableListAdapter(data));
         // End
-
-
     }
 
     public void SetListener()
@@ -84,10 +71,18 @@ public class AuthorityActivity extends AppCompatActivity {
                     //case R.id.btnAllowCamera:
                       //  ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_CAMERA}, CommonConst.Permission.REQUEST_CAMERA_CODE);
 //                        break;
-                    case R.id.btnAllowPhoneNumber:
-                        ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_PHONE_STATE}, CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE);
-                        break;
-                    case R.id.btnAuthorityComplete:
+                    //case R.id.btnAllowPhoneNumber:
+                      //  ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_PHONE_STATE}, CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE);
+                        //break;
+                    case R.id.auth_btnAllow:
+                        if (Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_CAMERA) == false)
+                        {//카메라 권한 요청
+                            ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_CAMERA}, CommonConst.Permission.REQUEST_CAMERA_CODE);                            
+                        }
+                        if (Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_PHONE_STATE) == false)
+                        {//폰 번호 권한 요청
+                            ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_PHONE_STATE}, CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE);
+                        }
 
                         if (Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_CAMERA) == true
                             && Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_PHONE_STATE) == true)
@@ -95,6 +90,8 @@ public class AuthorityActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), LoginActivity.class); //로그인 화면
                             startActivity(intent);
                         }
+                        //자동 로그인 정보는 있는데 권한만 없는거면 권한 설정후 바로 MainActivity로 넘어가야됨.
+
                         else
                         {//권한 없는 경우
                             Toast.makeText(getApplicationContext(),"앱 사용에 해당 권한들은 필수입니다.", Toast.LENGTH_LONG).show();
@@ -105,9 +102,9 @@ public class AuthorityActivity extends AppCompatActivity {
             }
         };
 
-        btnAllowCamera.setOnClickListener(Listener);
-        btnAllowPhoneNum.setOnClickListener(Listener);
-        btnComplete.setOnClickListener(Listener);
+        //btnAllowCamera.setOnClickListener(Listener);
+        //btnAllowPhoneNum.setOnClickListener(Listener);
+        btnAllow.setOnClickListener(Listener);
     }
 
     private void SetButtonEnable(Button btn, String permission)
@@ -152,10 +149,10 @@ public class AuthorityActivity extends AppCompatActivity {
         switch (requestCode)
         {
             case CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE: //Request Authority of Phone Number
-                SetButtonEnable(btnAllowPhoneNum, CommonConst.Permission.PERMISSION_PHONE_STATE);//Set Button enable
+                //SetButtonEnable(btnAllowPhoneNum, CommonConst.Permission.PERMISSION_PHONE_STATE);//Set Button enable
                 return;
             case CommonConst.Permission.REQUEST_CAMERA_CODE: //Request Authority of Camera
-                SetButtonEnable(btnAllowCamera, CommonConst.Permission.PERMISSION_CAMERA);//Set Button enable
+                //SetButtonEnable(btnAllowCamera, CommonConst.Permission.PERMISSION_CAMERA);//Set Button enable
                 return;
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);

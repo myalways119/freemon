@@ -1,6 +1,7 @@
 package common;
 
 import android.content.Context;
+import android.graphics.Picture;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import co.kr.freemon.R;
 
@@ -20,6 +23,8 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static final int CHILD = 1;
 
     private List<Item> data;
+
+    public enum Icon {phone, camera};
 
     public ExpandableListAdapter(List<Item> data) {
         this.data = data;
@@ -53,6 +58,16 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 final ListHeaderViewHolder itemController = (ListHeaderViewHolder) holder;
                 itemController.refferalItem = item;
                 itemController.header_title.setText(item.text);
+
+                //Set Icon
+                if(item.icon == Icon.phone)
+                {
+                    itemController.header_icon.setImageResource((R.drawable.ic_phone));
+                }
+                else
+                {
+                    itemController.header_icon.setImageResource((R.drawable.ic_camera));
+                }
 
                 if (item.invisibleChildren == null) {
                     itemController.btn_expand_toggle.setImageResource(R.drawable.ic_up);//upper
@@ -110,11 +125,13 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public TextView header_title;
         public ImageView btn_expand_toggle;
         public Item refferalItem;
+        public ImageView header_icon;
 
         public ListHeaderViewHolder(View itemView) {
             super(itemView);
             header_title = (TextView) itemView.findViewById(R.id.header_title);
             btn_expand_toggle = (ImageView) itemView.findViewById(R.id.btn_expand_toggle);
+            header_icon = (ImageView) itemView.findViewById(R.id.recycleView_List_HeaderIcon);
         }
     }
     private static class ListChildViewHolder extends RecyclerView.ViewHolder {
@@ -132,14 +149,16 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static class Item {
         public int type;
         public String text;
+        public Icon icon;
         public List<Item> invisibleChildren;
 
         public Item()
         {
         }
 
-        public Item(int type, String text)
+        public Item(Icon icon , int type, String text)
         {
+            this.icon = icon;
             this.type = type;
             this.text = text;
         }

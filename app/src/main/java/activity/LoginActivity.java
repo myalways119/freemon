@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
                         //Check Login Information from DB
                         break;
                     case R.id.btnJoin:
-                        Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), JoinPhoneAuthActivity.class);
                         startActivity(intent);
                         break;
                 }

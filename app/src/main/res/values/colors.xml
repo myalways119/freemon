@@ -11,4 +11,7 @@
     <color name="btnYellow">#F7D63B</color>
     <color name="btnYellowRipplie">#FFEA87</color>
     <color name="btnFontColorBlue">#2196F3</color>
+
+    <color name="editBoxFocusedUnderLine">#2196F3</color>
+
 </resources>

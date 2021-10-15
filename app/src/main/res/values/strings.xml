@@ -33,4 +33,15 @@
     <string name="join_service">개인정보 취급방침</string>
     <string name="join_service_agree">개인정보 취급방침 동의</string>
 
+    //Join-Phone Auth
+    <string name="join_phoneAuth_phoneHint">휴대전화 번호를 입력해 주세요.</string>
+    <string name="join_phoneAuth_comment">인증 요청 후, 1분 이내에 문자가 발송됩니다. 잠시 기다려주세요.</string>
+
+    //Join-Agree
+    <string name="join_agree_title">이용약관에 동의해주세요.</string>
+    <string name="join_agree_allAgree">모두 동의합니다.</string>
+    <string name="join_agree_allAgreeComment">아래 항목에 대한 모든 동의가 포함되어 있습니다.
+필수 항목에 대한 동의를 거부하는 경우 서비스 이용이 불가능 합니다.</string>
+    <string name="join_agree_see">보기</string>
+    <string name="join_agree_next">동의하고 계속 진행합니다.</string>
 </resources>

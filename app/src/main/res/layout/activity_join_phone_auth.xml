@@ -18,7 +18,7 @@
         android:fontFamily="@font/custom_font_family"
         android:gravity="center"
         android:text="@string/joinPhoneNumber"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         />
 
     <LinearLayout
-        android:id="@+id/joing_authPhone_linearlayout"
+        android:id="@+id/join_authPhone_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -34,21 +34,17 @@
         app:layout_constraintTop_toBottomOf="@+id/join_authPhone_txtTitle"
         android:layout_marginTop="20dp"
         >
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/joing_authPhon_editTxtPhoneNum"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="1dp"
-            android:layout_weight="2"
-            >
-            <EditText
-                android:id="@+id/joing_authPhon_editTxtPhoneNum"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:gravity="left"/>
-        </LinearLayout>
+            android:textSize="17sp"
+            android:gravity="left"
+            android:hint="@string/join_phoneAuth_phoneHint"
+            android:theme="@style/editTextStyle"
+            android:inputType="number"
+            android:maxLength="11"
+            />
 
         <Button
             android:id="@+id/btnAllowPhoneNumber"
@@ -62,6 +58,14 @@
             android:layout_marginLeft="5dp"
             />
     </LinearLayout>
+    <TextView
+        android:id="@+id/join_phoneAuth_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
+        android:text="@string/join_phoneAuth_comment"
+        app:layout_constraintTop_toBottomOf="@+id/join_authPhone_linearlayout"
+        />
 
     <Button
         android:id="@+id/join_authPhone_btnCheckCode"
@@ -70,7 +74,7 @@
         android:text="@string/do_join"
         android:background="@drawable/button_round_border"
         android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@+id/joing_authPhone_linearlayout"
+        app:layout_constraintTop_toBottomOf="@+id/join_phoneAuth_comment"
         android:layout_marginTop="20dp"/>
 
 
