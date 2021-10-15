@@ -16,7 +16,7 @@ public class DbRequest
 
     public static class UrlConst
     {
-        final private static String  baseUrl = "https://freemon1.cafe24.com/"
+        final private static String  baseUrl = "https://freemon1.cafe24.com/";
     }
 
     public class InsertRequest
@@ -24,7 +24,6 @@ public class DbRequest
         //서버 url 설정(php파일 연동)
         final static  private String URL=  UrlConst.baseUrl + "ConnectionTest.php";
     }
-
 
     public class UpdateRequest
     {
