@@ -1,81 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/join_frag_phoneAuthority"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="activity.LoginActivity"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:paddingTop="60dp"
-    android:paddingBottom="20dp">
+    android:paddingTop="40dp"
+    android:paddingBottom="40dp"
+    >
 
     <TextView
         android:id="@+id/join_authPhone_txtTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/custom_font_family"
-        android:gravity="center"
-        android:text="@string/joinPhoneNumber"
-        android:textSize="25sp"
+        android:text="@string/join_phoneAuth_title"
+        android:textAlignment="center"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="23sp"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <LinearLayout
-        android:id="@+id/join_authPhone_linearlayout"
+    <TextView
+        android:id="@+id/auth_txtSubTile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
+        android:text="@string/join_phoneAuth_titleComment"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        android:layout_marginTop="17dp"
         app:layout_constraintTop_toBottomOf="@+id/join_authPhone_txtTitle"
-        android:layout_marginTop="20dp"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/join_authPhone_topConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/auth_txtSubTile"
+        android:layout_marginTop="35dp"
         >
+
         <EditText
-            android:id="@+id/joing_authPhon_editTxtPhoneNum"
-            android:layout_width="wrap_content"
+            android:id="@+id/join_authPhon_editTxtPhoneNum"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:gravity="left"
+            android:textSize="15sp"
             android:hint="@string/join_phoneAuth_phoneHint"
             android:theme="@style/editTextStyle"
             android:inputType="number"
             android:maxLength="11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/join_authPhon_btnAskSms"
+            android:layout_marginRight="10dp"
             />
 
         <Button
-            android:id="@+id/btnAllowPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/join_authPhon_btnAskSms"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
             android:text="@string/AskAuthorityCode"
             android:background="@drawable/button_round_border"
             android:textSize="13sp"
-            android:layout_weight="5"
-            android:gravity="center"
-            android:layout_marginLeft="5dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintWidth_percent="0.3"
             />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/join_phoneAuth_comment"
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/join_authPhone_bottomConstraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="13dp"
-        android:text="@string/join_phoneAuth_comment"
-        app:layout_constraintTop_toBottomOf="@+id/join_authPhone_linearlayout"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/join_authPhone_topConstraint"
+        android:layout_marginTop="15dp"
+        >
+
+        <EditText
+            android:layout_width="0dp"
+            android:id="@+id/join_authPhon_editTxtAuthCodeInput"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:hint="@string/join_phoneAuth_checkSmsCodeHint0"
+            android:theme="@style/editTextStyle"
+            android:inputType="number"
+            android:maxLength="11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/join_authPhone_btnCheckCode"
+        android:id="@+id/join_authPhone_btnNext"
+        android:background="@drawable/button_round_border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/do_join"
-        android:background="@drawable/button_round_border"
+        android:text="@string/next"
         android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@+id/join_phoneAuth_comment"
+        app:layout_constraintTop_toBottomOf="@+id/join_authPhone_bottomConstraint"
         android:layout_marginTop="20dp"/>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+

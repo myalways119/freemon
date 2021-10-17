@@ -14,15 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Freemon">
+
         <activity
             android:name="activity.JoinProfileActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name="activity.JoinAgreeActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name="activity.JoinPhoneAuthActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name="activity.IntroActivity"
             android:exported="true"

@@ -1,125 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingTop="40dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="40dp"
     tools:context="activity.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
         >
-        <!--*android:background="@color/mainYellow"-->
-
 
         <ImageView
             android:id="@+id/mainLogo"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:srcCompat="@drawable/ic_social"
-            android:scaleType="centerInside"
+            android:layout_height="50dp"
             android:layout_marginBottom="10dp"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@+id/txtTile"
+            app:srcCompat="@drawable/ic_social"
             />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtTile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/main_comment"
             android:textAlignment="center"
-            android:textStyle="bold"
             android:textSize="17sp"
-            />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
-
-        <TextView
-            android:id="@+id/tvLoginId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/id"
-            android:layout_marginBottom="5dp"
-            android:textSize="17sp"/>
-        <EditText
-            android:id="@+id/etLoginId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/join_email"
-            app:layout_constraintEnd_toEndOf="@+id/check_button"
-            android:background="@drawable/corner_round_border"
-            android:layout_gravity="center"
-            android:hint="@string/id_hit"
-            android:textSize="15sp"
-            android:padding="15sp"
-            />
-        <TextView
-            android:id="@+id/idMandatory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:id="@+id/tvLoginPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/password"
-            android:layout_marginBottom="5dp"
-            android:textSize="17sp"/>
-        <EditText
-            android:id="@+id/etLoginPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/corner_round_border"
-            android:ems="10"
-            android:hint="@string/password_hit"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/join_email"
-            app:layout_constraintEnd_toEndOf="@+id/check_button"
-            android:layout_gravity="center"
-            android:textSize="15sp"
-            android:padding="15sp"
-            />
-        <TextView
-            android:id="@+id/passwordMandatory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            />
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/do_login"
-            android:background="@drawable/button_round_border"
-            android:layout_marginBottom="15dp"
-            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/btnFindUseInfo"
+            app:layout_constraintTop_toBottomOf="@+id/mainLogo"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra ="3dp"
             />
 
         <Button
             android:id="@+id/btnJoin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/do_join"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
             android:background="@drawable/button_round_border"
+            android:text="@string/do_join"
             android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFindUseInfo"
+            android:layout_marginTop="20dp"
             />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnFindUseInfo"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_round_border"
+            android:text="@string/login_findUserInfo"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnJoin"
+            app:layout_constraintTop_toBottomOf="@+id/txtTile"
+            android:layout_marginTop="10dp"
+            />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

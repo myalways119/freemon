@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void InitializeView()
     {
-        btn_login = (Button) findViewById(R.id.btnLogin);
+        btn_login = (Button) findViewById(R.id.btnFindUseInfo);
         btn_join = (Button) findViewById(R.id.btnJoin);
     }
 
@@ -36,12 +36,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 switch (view.getId()) {
-                    case R.id.btnLogin:
-                        //Check Login Information from DB
-                        break;
                     case R.id.btnJoin:
-                        Intent intent = new Intent(getApplicationContext(), JoinPhoneAuthActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), JoinAgreeActivity.class);
                         startActivity(intent);
+                        break;
+                    case R.id.btnFindUseInfo:
+                        //Check Login Information from DB
                         break;
                 }
             }

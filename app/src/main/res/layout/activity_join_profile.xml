@@ -1,26 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="activity.JoinProfileActivity">
+    tools:context="activity.LoginActivity"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="40dp"
+    android:paddingBottom="20dp">
 
-    <EditText
-        android:id="@+id/join_profile_editTxtName"
+
+    <TextView
+        android:id="@+id/join_authPhone_txtTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="이름은">
-    </EditText>
+        android:text="@string/profile_title"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="23sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+
+    <TextView
+        android:id="@+id/join_authProfile_txtNickNam111e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_nickName"
+        android:textSize="13sp"
+        />
     <EditText
-        android:id="@+id/join_profile_editTxtGender"
+        android:id="@+id/join_authProfile_editTxtNickN2222ame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="M">
-    </EditText>
+        android:textSize="17sp"
+        android:textAlignment="textStart"
+        android:theme="@style/editTextStyle"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/join_authProfile_txtNickNam111e"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/join_authPhone_txtTitle"
+        app:layout_constraintBottom_toTopOf="@+id/join_authPhone_btnNext"
+        android:layout_marginTop="17dp"
+        android:stretchColumns='1,2'>
+
+        <TableRow>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:id="@+id/join_authProfile_txtNickName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_nickName"
+                android:textSize="15sp"
+                />
+            <EditText
+
+                android:id="@+id/join_authProfile_editTxtNickName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textAlignment="textStart"
+                android:theme="@style/editTextStyle"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/join_authProfile_gender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_gender"
+                android:layout_weight="0.3"
+                android:textSize="15sp"
+                android:layout_gravity="center"/>
+
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="0.7"
+                >
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_women"
+                    android:layout_weight="0.5"
+                    android:textSize="11sp"
+                    android:buttonTint="@color/mainYellow"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_men"
+                    android:layout_weight="0.5"
+                    android:textSize="11sp"
+                    android:buttonTint="@color/mainYellow"/>
+           </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_column="1"
+                android:id="@+id/join_authProfile_txtBerth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_berth"
+                android:layout_weight="0.3"
+                android:textSize="15sp"
+                />
+            <EditText
+                android:layout_column="2"
+                android:id="@+id/join_authProfile_editTxtBerth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:textSize="15sp"
+                android:textAlignment="textStart"
+                android:theme="@style/editTextStyle"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_column="1"
+                android:id="@+id/join_authProfile_txtIntro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_introduction"
+                android:layout_weight="0.3"
+                android:textSize="15sp"
+                />
+            <EditText
+                android:layout_column="2"
+                android:id="@+id/join_authProfile_editTxtIntro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:textSize="15sp"
+                android:textAlignment="textStart"
+                android:theme="@style/editTextStyle"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_column="1"
+                android:id="@+id/join_authProfile_txtInerestedCity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_interested_city"
+                android:layout_weight="0.3"
+                android:textSize="15sp"
+                />
+            <EditText
+                android:layout_column="2"
+                android:id="@+id/join_authProfile_editTxtInterestedCity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:textSize="15sp"
+                android:textAlignment="textStart"
+                android:theme="@style/editTextStyle"
+                />
+        </TableRow>
+
+        <View
+            android:background="#E6E6E6"
+            android:layout_height="2dp"
+            />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_column="1"
+                android:id="@+id/join_authProfile_txtAccountQuestion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_account_question"
+                android:layout_weight="0.3"
+                android:textSize="15sp"
+                />
+            <EditText
+                android:layout_column="2"
+                android:id="@+id/join_authProfile_editTxtAccountQuestion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:textSize="15sp"
+                android:textAlignment="textStart"
+                android:theme="@style/editTextStyle"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_column="1"
+                android:id="@+id/join_authProfile_txtAccountAnswer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_account_answer"
+                android:layout_weight="0.3"
+                android:textSize="15sp"
+                />
+            <EditText
+                android:layout_column="2"
+                android:id="@+id/join_authProfile_editTxtAccountAnswer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:textSize="15sp"
+                android:textAlignment="textStart"
+                android:theme="@style/editTextStyle"
+                />
+        </TableRow>
+
+
+    </TableLayout>
     <Button
-        android:id="@+id/join_profile_btnLogin"
+        android:id="@+id/join_authPhone_btnNext"
+        android:background="@drawable/button_round_border"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

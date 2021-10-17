@@ -75,26 +75,17 @@ public class AuthorityActivity extends AppCompatActivity {
                       //  ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_PHONE_STATE}, CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE);
                         //break;
                     case R.id.auth_btnAllow:
-                        if (Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_CAMERA) == false)
+                        boolean hasCameraPermission = Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_CAMERA);
+                        boolean hasPhoneStatePermission = Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_PHONE_STATE);
+
+                        if (hasCameraPermission == false)
                         {//카메라 권한 요청
-                            ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_CAMERA}, CommonConst.Permission.REQUEST_CAMERA_CODE);                            
+                            ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_CAMERA}, CommonConst.Permission.REQUEST_CAMERA_CODE);
                         }
-                        if (Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_PHONE_STATE) == false)
+
+                        if (hasPhoneStatePermission == false)
                         {//폰 번호 권한 요청
                             ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_PHONE_STATE}, CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE);
-                        }
-
-                        if (Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_CAMERA) == true
-                            && Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_PHONE_STATE) == true)
-                        {//권한 있는 경우
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class); //로그인 화면
-                            startActivity(intent);
-                        }
-                        //자동 로그인 정보는 있는데 권한만 없는거면 권한 설정후 바로 MainActivity로 넘어가야됨.
-
-                        else
-                        {//권한 없는 경우
-                            Toast.makeText(getApplicationContext(),"앱 사용에 해당 권한들은 필수입니다.", Toast.LENGTH_LONG).show();
                         }
 
                         break;
@@ -107,28 +98,19 @@ public class AuthorityActivity extends AppCompatActivity {
         btnAllow.setOnClickListener(Listener);
     }
 
-    private void SetButtonEnable(Button btn, String permission)
+    private void DoNextActivity()
     {
-        boolean hasPermission = false;
-        String askPermision = "권한요청";
-        String hasPermision = "설정완료";
+        //권한 요청후 한번 더 확인
+        boolean hasCameraPermission = Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_CAMERA);
+        boolean hasPhoneStatePermission = Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_PHONE_STATE);
 
-        if(permission.isEmpty() == true || btn == null) return;
+        if (hasCameraPermission == true && hasPhoneStatePermission == true)
+        {
+            //자동 로그인 정보가 있는 경우, Main 화면으로 이동
+            //아니면 Login화면
 
-        if (Common.CheckPermission(this, permission) == true)
-        {
-            hasPermission = true;
-        }
-
-        if (hasPermission == true)
-        {
-            btn.setEnabled(false);
-            btn.setText(hasPermision);
-        }
-        else
-        {
-            btn.setEnabled(true);
-            btn.setText(askPermision);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class); //로그인 화면
+            startActivity(intent);
         }
     }
 
@@ -149,10 +131,10 @@ public class AuthorityActivity extends AppCompatActivity {
         switch (requestCode)
         {
             case CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE: //Request Authority of Phone Number
-                //SetButtonEnable(btnAllowPhoneNum, CommonConst.Permission.PERMISSION_PHONE_STATE);//Set Button enable
+                DoNextActivity();
                 return;
             case CommonConst.Permission.REQUEST_CAMERA_CODE: //Request Authority of Camera
-                //SetButtonEnable(btnAllowCamera, CommonConst.Permission.PERMISSION_CAMERA);//Set Button enable
+                DoNextActivity();
                 return;
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);

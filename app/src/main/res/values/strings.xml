@@ -4,7 +4,6 @@
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
     <string name="do_login">로그인 하기</string>
-    <string name="do_join">가입 하기</string>
     <string name="id_hit">아이디를 입력해 주세요.</string>
     <string name="password_hit">비밀변호를 입력해 주세요.</string>
     <string name="AuthorityPhoneNumber">전화번호 인증</string>
@@ -26,16 +25,22 @@
     <string name="joinPhoneNumberComment"></string>
     <string name="joinAgreeComment">정보제공 동의</string>
     <string name="joinProfileComment">프로필</string>
-    <string name="AskAuthorityCode">인증요청</string>
+    <string name="AskAuthorityCode">인증번호요청</string>
 
     <string name="join_profile">서비스 이용약관</string>
-    <string name="join_profile_agree">서비스 이용약관 동의</string>
+    <string name="join_profile_agree">서비스 이용약관 동의 (필수)</string>
     <string name="join_service">개인정보 취급방침</string>
-    <string name="join_service_agree">개인정보 취급방침 동의</string>
+    <string name="join_service_agree">개인정보 취급방침 동의 (필수)</string>
+
+    //Login
+    <string name="do_join">새로운 계정 만들기</string>
+    <string name="login_findUserInfo">계정 찾기</string>
 
     //Join-Phone Auth
     <string name="join_phoneAuth_phoneHint">휴대전화 번호를 입력해 주세요.</string>
     <string name="join_phoneAuth_comment">인증 요청 후, 1분 이내에 문자가 발송됩니다. 잠시 기다려주세요.</string>
+    <string name="join_phoneAuth_checkSmsCode">인증</string>
+    <string name="join_phoneAuth_checkSmsCodeHint0">인증 코드를 입력해주세요.</string>
 
     //Join-Agree
     <string name="join_agree_title">이용약관에 동의해주세요.</string>
@@ -44,4 +49,23 @@
 필수 항목에 대한 동의를 거부하는 경우 서비스 이용이 불가능 합니다.</string>
     <string name="join_agree_see">보기</string>
     <string name="join_agree_next">동의하고 계속 진행합니다.</string>
+
+    //Join-Phone Auth
+    <string name="join_phoneAuth_title">전화번호 인증</string>
+    <string name="join_phoneAuth_titleComment">본인 인증 용도로만 사용 됩니다.</string>
+
+    //Profile
+    <string name="profile_title">프로필 작성</string>
+    <string name="profile_nickName">닉네임</string>
+    <string name="profile_gender">성별</string>
+    <string name="profile_berth">생년월일</string>
+    <string name="profile_introduction">자기소개</string>
+    <string name="profile_city">사는 곳</string>
+    <string name="profile_interested_city">관심 지역</string>
+    <string name="profile_account_question">질문</string>
+    <string name="profile_account_answer">답변</string>
+
+    <string name="profile_men">남성</string>
+    <string name="profile_women">여성</string>
+
 </resources>
