@@ -57,8 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/join_profile_agree"
                 android:buttonTint="@color/mainYellow"
-                app:layout_constraintLeft_toLeftOf="parent"
-                />
+                app:layout_constraintLeft_toLeftOf="parent"                />
 
             <Button
                 android:id="@+id/join_agree_btnseeServiceContent"
@@ -67,6 +66,7 @@
                 android:text="@string/join_agree_see"
                 android:layout_gravity="right"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@+id/join_agree_chkAllowService"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -88,6 +88,7 @@
                 android:text="@string/join_agree_see"
                 android:layout_gravity="right"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@+id/join_agree_chkAllowProfile"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

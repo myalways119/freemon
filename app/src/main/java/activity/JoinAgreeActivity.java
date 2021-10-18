@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,6 +27,11 @@ public class JoinAgreeActivity extends AppCompatActivity {
     CheckBox chkAllowService;
     CheckBox chkAllowProfile;
     Button btnAllowAndNext;
+    Button btnSeeService;
+    Button btnSeeProfile;
+
+    TextView txtViewDialogTitle;
+    Dialog textViewDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +44,16 @@ public class JoinAgreeActivity extends AppCompatActivity {
 
     public void InitializeView()
     {
+        textViewDialog = new Dialog(this);
+        textViewDialog.setContentView(R.layout.dialog_content);
+        txtViewDialogTitle = findViewById(R.id.dialog_content_title);
 
         chkAllowAll = findViewById(R.id.join_agree_chkAllowAll);
         chkAllowService = findViewById(R.id.join_agree_chkAllowService);
         chkAllowProfile = findViewById(R.id.join_agree_chkAllowProfile);
         btnAllowAndNext = findViewById(R.id.join_agree_btnAllowAndNext);
+        btnSeeService = findViewById(R.id.join_agree_btnseeServiceContent);
+        btnSeeProfile = findViewById(R.id.join_agree_btnseeProfileContent);
     }
 
     public void SetListener()
@@ -77,6 +89,12 @@ public class JoinAgreeActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         break;
+                    case R.id.join_agree_btnseeProfileContent:
+                        ShowTextViewDialog(R.id.join_agree_btnseeProfileContent);
+                        break;
+                    case R.id.join_agree_btnseeServiceContent:
+                        ShowTextViewDialog(R.id.join_agree_btnseeServiceContent);
+                        break;
                 }
             }
         };
@@ -85,5 +103,36 @@ public class JoinAgreeActivity extends AppCompatActivity {
         chkAllowAll.setOnClickListener(Listener);
         chkAllowService.setOnClickListener(Listener);
         chkAllowProfile.setOnClickListener(Listener);
+        btnSeeService.setOnClickListener((Listener));
+        btnSeeProfile.setOnClickListener((Listener));
     }
+
+    public void ShowTextViewDialog(int id)
+    {
+        textViewDialog.show(); // 다이얼로그 띄우기
+
+        Button btnOk = textViewDialog.findViewById(R.id.dialog_content_btnOk);
+        TextView txtMainView = textViewDialog.findViewById(R.id.dialog_content_mainTxtView);
+
+        if(id == R.id.join_agree_btnseeProfileContent)
+        {
+            txtViewDialogTitle.setText(R.string.join_agree_profile);
+            txtMainView.setText(R.string.join_agree_profileContent);
+        }
+        else if(id == R.id.join_agree_btnseeServiceContent)
+        {
+            txtViewDialogTitle.setText(R.string.join_agree_service);
+            txtMainView.setText(R.string.join_agree_serviceContent);
+        }
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 원하는 기능 구현
+                textViewDialog.dismiss(); // 다이얼로그 닫기
+            }
+        });
+
+    }
+
 }
