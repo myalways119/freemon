@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -59,13 +60,11 @@ public class JoinProfileActivity extends AppCompatActivity {
                 if (result.getResultCode() == RESULT_OK)
                 {
                     Intent intent = result.getData();
-                    Log.e(TAG, "intent : " + intent);
+                    //Log.e(TAG, "intent : " + intent);
                     Uri uri = intent.getData();
-                    Log.e(TAG, "uri : " + uri);
+                    //Log.e(TAG, "uri : " + uri);
                     imgView.setImageURI(uri);
-                    Glide.with(MainActivity.this)
-                            .load(uri)
-                            .into(imgView);
+                    Glide.with(getApplicationContext()).load(uri).into(imgView);
                 }
             }
         });
@@ -90,8 +89,8 @@ public class JoinProfileActivity extends AppCompatActivity {
                         //Validation
                         //mandatory check/ 아이디 중복 체크(전번)
 
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
+                        Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent1);
                         break;
                 }
             }

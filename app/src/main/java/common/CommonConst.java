@@ -3,10 +3,10 @@ package common;
 public class CommonConst {
 
     //Preference
-    public static final String PrefKeyId ="PrefKeyId";
-    public static final String PrefKeyPw ="PrefKeyPw";
+    //public static final String PrefKeyId ="PrefKeyId";
+    //public static final String PrefKeyPw ="PrefKeyPw";
 
-    public static final String SharedPreferencesFileName ="SharedPreFile";
+    //public static final String SharedPreferencesFileName ="SharedPreFile";
 
     public class Permission
     {

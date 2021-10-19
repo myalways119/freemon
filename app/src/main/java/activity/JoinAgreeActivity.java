@@ -30,8 +30,10 @@ public class JoinAgreeActivity extends AppCompatActivity {
     Button btnSeeService;
     Button btnSeeProfile;
 
-    TextView txtViewDialogTitle;
     Dialog textViewDialog;
+
+    String agreeProfile;
+    String agreeService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,6 @@ public class JoinAgreeActivity extends AppCompatActivity {
     {
         textViewDialog = new Dialog(this);
         textViewDialog.setContentView(R.layout.dialog_content);
-        txtViewDialogTitle = findViewById(R.id.dialog_content_title);
 
         chkAllowAll = findViewById(R.id.join_agree_chkAllowAll);
         chkAllowService = findViewById(R.id.join_agree_chkAllowService);
@@ -90,10 +91,10 @@ public class JoinAgreeActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.join_agree_btnseeProfileContent:
-                        ShowTextViewDialog(R.id.join_agree_btnseeProfileContent);
+                        ShowTextViewDialog(view.getId());
                         break;
                     case R.id.join_agree_btnseeServiceContent:
-                        ShowTextViewDialog(R.id.join_agree_btnseeServiceContent);
+                        ShowTextViewDialog(view.getId());
                         break;
                 }
             }
@@ -103,6 +104,7 @@ public class JoinAgreeActivity extends AppCompatActivity {
         chkAllowAll.setOnClickListener(Listener);
         chkAllowService.setOnClickListener(Listener);
         chkAllowProfile.setOnClickListener(Listener);
+
         btnSeeService.setOnClickListener((Listener));
         btnSeeProfile.setOnClickListener((Listener));
     }
@@ -113,16 +115,19 @@ public class JoinAgreeActivity extends AppCompatActivity {
 
         Button btnOk = textViewDialog.findViewById(R.id.dialog_content_btnOk);
         TextView txtMainView = textViewDialog.findViewById(R.id.dialog_content_mainTxtView);
+        TextView txtViewDialogTitle = textViewDialog.findViewById(R.id.dialog_content_title);
+
+        txtMainView.setText("");
 
         if(id == R.id.join_agree_btnseeProfileContent)
         {
             txtViewDialogTitle.setText(R.string.join_agree_profile);
-            txtMainView.setText(R.string.join_agree_profileContent);
+//            txtMainView.setText(R.string.join_agree_profileContent);
         }
         else if(id == R.id.join_agree_btnseeServiceContent)
         {
             txtViewDialogTitle.setText(R.string.join_agree_service);
-            txtMainView.setText(R.string.join_agree_serviceContent);
+//            txtMainView.setText(R.string.join_agree_serviceContent);
         }
 
         btnOk.setOnClickListener(new View.OnClickListener() {

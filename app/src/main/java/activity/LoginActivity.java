@@ -11,8 +11,9 @@ import co.kr.freemon.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btn_login;
-    Button btn_join;
+    Button btnLogin;
+    Button btnJoin;
+    Button btnFindPrevPhoneNumAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void InitializeView()
     {
-        btn_login = (Button) findViewById(R.id.btnFindUseInfo);
-        btn_join = (Button) findViewById(R.id.btnJoin);
+        btnLogin = (Button) findViewById(R.id.login_btnLogin);
+        btnJoin = (Button) findViewById(R.id.login_btnJoin);
+        btnFindPrevPhoneNumAccount = (Button) findViewById(R.id.login_btnFindPrevPhoneNum);
     }
 
     public void SetListener()
@@ -36,18 +38,23 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 switch (view.getId()) {
-                    case R.id.btnJoin:
+                    case R.id.login_btnLogin:
                         Intent intent = new Intent(getApplicationContext(), JoinAgreeActivity.class);
                         startActivity(intent);
                         break;
-                    case R.id.btnFindUseInfo:
+                    case R.id.login_btnJoin:
+                        Intent joinIntent = new Intent(getApplicationContext(), JoinAgreeActivity.class);
+                        startActivity(joinIntent);
+                        break;
+                    case R.id.login_btnFindPrevPhoneNum:
                         //Check Login Information from DB
                         break;
                 }
             }
         };
 
-        btn_login.setOnClickListener(Listener);
-        btn_join.setOnClickListener(Listener);
+        btnLogin.setOnClickListener(Listener);
+        btnJoin.setOnClickListener(Listener);
+        btnFindPrevPhoneNumAccount.setOnClickListener(Listener);
     }
 }

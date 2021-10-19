@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="@string/main_comment"
             android:textAlignment="center"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/btnFindUseInfo"
             app:layout_constraintTop_toBottomOf="@+id/mainLogo"
@@ -45,21 +45,34 @@
             />
 
         <Button
-            android:id="@+id/btnJoin"
+            android:id="@+id/login_btnLogin"
             android:layout_width="300dp"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round_border"
+            android:text="@string/login"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnJoin"
+            app:layout_constraintTop_toBottomOf="@+id/txtTile"
+            android:layout_marginTop="30dp"
+            android:hint="@string/loginHint"
+            />
+
+        <Button
+            android:id="@+id/login_btnJoin"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/button_round_border"
             android:text="@string/do_join"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnFindUseInfo"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             />
 
         <Button
-            android:id="@+id/btnFindUseInfo"
+            android:id="@+id/login_btnFindPrevPhoneNum"
             android:layout_width="300dp"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/button_round_border"
             android:text="@string/login_findUserInfo"
             android:textSize="15sp"

@@ -3,33 +3,35 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/button_round_border.xml" value="0.19947916666666668" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/corner_round_border.xml" value="0.19947916666666668" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/custom_checkbox.xml" value="0.24427083333333333" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/custom_edittextbox.xml" value="0.2074074074074074" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/ic_camera.xml" value="0.47524750680271916" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/ic_down.xml" value="0.22083333333333333" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19947916666666668" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/ic_phone.xml" value="0.26145833333333335" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/ic_social.xml" value="0.24427083333333333" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/imageview_circle.xml" value="0.203125" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/drawable/ic_up.xml" value="0.22083333333333333" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/font/custom_font_family.xml" value="0.2462962962962963" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_authority.xml" value="0.23762375340135958" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_authority.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_club.xml" value="0.234375" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_intro.xml" value="0.19009900272108768" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_join.xml" value="0.16158415231292453" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_join_agree.xml" value="0.31366335448979465" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_join_phone_auth.xml" value="0.20910890299319643" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_join_profile.xml" value="0.7128712602040788" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_join_agree.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_join_phone_auth.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_join_profile.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/activity_main.xml" value="0.234375" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/dialog_content.xml" value="0.23762375340135958" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/fragment_join_agreement.xml" value="0.20910890299319643" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/fragment_join_phone_authority.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/dialog_content.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/fragment_join_agreement.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/fragment_join_phone_authority.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/fragment_join_profile.xml" value="0.24791666666666667" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/list_child.xml" value="0.18333333333333332" />
         <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/list_header.xml" value="0.18333333333333332" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/recyclerview_list_child.xml" value="0.1" />
-        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/recycleview_list_header.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/recyclerview_list_child.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/freemon/app/src/main/res/layout/recycleview_list_header.xml" value="0.33" />
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/drawable/button_round_border.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/drawable/corner_border_yellow.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/Ho/AndroidStudioProjects/freemon2/app/src/main/res/drawable/corner_round_border.xml" value="0.22083333333333333" />
