@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="20dp"
-    android:paddingTop="40dp"
     android:paddingRight="20dp"
+    android:paddingTop="40dp"
     android:paddingBottom="40dp"
     tools:context="activity.LoginActivity">
 
@@ -46,11 +46,11 @@
 
         <Button
             android:id="@+id/login_btnLogin"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_round_border"
             android:text="@string/login"
-            android:textSize="17sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/btnJoin"
             app:layout_constraintTop_toBottomOf="@+id/txtTile"
             android:layout_marginTop="30dp"
@@ -59,11 +59,11 @@
 
         <Button
             android:id="@+id/login_btnJoin"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_round_border"
             android:text="@string/do_join"
-            android:textSize="17sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnFindUseInfo"
             android:layout_marginTop="10dp"
@@ -71,7 +71,7 @@
 
         <Button
             android:id="@+id/login_btnFindPrevPhoneNum"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_round_border"
             android:text="@string/login_findUserInfo"

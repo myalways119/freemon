@@ -67,13 +67,8 @@ public class AuthorityActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                switch (view.getId()) {
-                    //case R.id.btnAllowCamera:
-                      //  ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_CAMERA}, CommonConst.Permission.REQUEST_CAMERA_CODE);
-//                        break;
-                    //case R.id.btnAllowPhoneNumber:
-                      //  ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_PHONE_STATE}, CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE);
-                        //break;
+                switch (view.getId())
+                {
                     case R.id.auth_btnAllow:
                         boolean hasCameraPermission = Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_CAMERA);
                         boolean hasPhoneStatePermission = Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_PHONE_STATE);
@@ -88,6 +83,8 @@ public class AuthorityActivity extends AppCompatActivity {
                             ActivityCompat.requestPermissions(AuthorityActivity.this, new String[]{CommonConst.Permission.PERMISSION_PHONE_STATE}, CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE);
                         }
 
+                        GoNextActivity();
+
                         break;
                 }
             }
@@ -98,7 +95,7 @@ public class AuthorityActivity extends AppCompatActivity {
         btnAllow.setOnClickListener(Listener);
     }
 
-    private void DoNextActivity()
+    private void GoNextActivity()
     {
         //권한 요청후 한번 더 확인
         boolean hasCameraPermission = Common.CheckPermission(getApplicationContext(), CommonConst.Permission.PERMISSION_CAMERA);
@@ -108,7 +105,7 @@ public class AuthorityActivity extends AppCompatActivity {
         {
             //자동 로그인 정보가 있는 경우, Main 화면으로 이동
             //아니면 Login화면
-
+            finish();
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class); //로그인 화면
             startActivity(intent);
         }
@@ -131,10 +128,10 @@ public class AuthorityActivity extends AppCompatActivity {
         switch (requestCode)
         {
             case CommonConst.Permission.REQUEST_READ_PHONE_STATE_CODE: //Request Authority of Phone Number
-                DoNextActivity();
+                GoNextActivity();
                 return;
             case CommonConst.Permission.REQUEST_CAMERA_CODE: //Request Authority of Camera
-                DoNextActivity();
+                GoNextActivity();
                 return;
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);

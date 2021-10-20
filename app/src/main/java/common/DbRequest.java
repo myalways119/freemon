@@ -21,9 +21,9 @@ public class DbRequest
 
     public static class UrlConst
     {
-        private static final String ROOT_URL = "https://freemon1.cafe24.com/freemon1/userinfo.php?apicall=";
-        public static final String INSERT_TB_USER = ROOT_URL + "INSERT_TB_USER";
-        public static final String SELECT_TB_USER = ROOT_URL + "SELECT_TB_USER";
+        private static final String ROOT_URL = "https://freemon1.cafe24.com/myfirstdream/php/";
+        public static final String INSERT_TB_USER = ROOT_URL + "user_info.php?apicall=INSERT_TB_USER";
+        public static final String SELECT_TB_USER = ROOT_URL + "user_info.php?apicall=SELECT_TB_USER";
     }
 
     public class UpdateRequest

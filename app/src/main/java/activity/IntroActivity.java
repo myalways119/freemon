@@ -33,8 +33,6 @@ import item.UserInfo;
 public class IntroActivity extends AppCompatActivity {
     private SharedPreferences pref;
 
-    private boolean hasPermission = false;
-
     UserInfo userInfoFromDb = null;
 
     //요청할 권한들 배열로 선언
@@ -71,8 +69,8 @@ public class IntroActivity extends AppCompatActivity {
         String phoneNum = "";
         String androidId = "";
 
-        if(Common.CheckPermission(this, CommonConst.Permission.PERMISSION_CAMERA) == true
-                && Common.CheckPermission(this, CommonConst.Permission.PERMISSION_PHONE_STATE))
+        if(Common.CheckPermission(this, CommonConst.Permission.PERMISSION_CAMERA) == false
+           || Common.CheckPermission(this, CommonConst.Permission.PERMISSION_PHONE_STATE) == false)
         {
             returnIntent = new Intent(getApplicationContext(), AuthorityActivity.class); //권한 설정화면
         }
