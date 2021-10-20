@@ -34,11 +34,8 @@ public class IntroActivity extends AppCompatActivity {
     private SharedPreferences pref;
 
     private boolean hasPermission = false;
-    private boolean hasLoginInfo = false;
 
     UserInfo userInfoFromDb = null;
-
-    //private static final int PERMISSION_REQUEST_CODE = 0;
 
     //요청할 권한들 배열로 선언
     private String[] PERMISSIONS =
@@ -48,7 +45,8 @@ public class IntroActivity extends AppCompatActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
@@ -67,41 +65,42 @@ public class IntroActivity extends AppCompatActivity {
 
     private Intent GetNextActivityIntent()
     {
-        //GET VARIABLES
         Intent returnIntent;
-        hasPermission = false;
-        String phoneNum = SharedPrefManager.getInstance(getApplicationContext()).GetValue(SharedPrefManager.KEY_PHONE_NUM);//내부 저장소에서 저장된 폰번호(SharedPref)
         String devicePhoneNum = "";
-        String deviceAndroidId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
+        String deviceAndroidId = "";
+        String phoneNum = "";
+        String androidId = "";
 
         if(Common.CheckPermission(this, CommonConst.Permission.PERMISSION_CAMERA) == true
-           && Common.CheckPermission(this, CommonConst.Permission.PERMISSION_PHONE_STATE))
+                && Common.CheckPermission(this, CommonConst.Permission.PERMISSION_PHONE_STATE))
         {
-            hasPermission = true;
-            devicePhoneNum = Common.getPhoneNumber(this.getApplicationContext()); //권한 반드시 있어야 해당 값을 가져올 수 있음. READ_PHONE_STATE
-        }
-
-        if(devicePhoneNum.isEmpty() == false)
-        {
-            GetUserInfo(devicePhoneNum);//Get User Info From DB.
-        }
-        //--END
-
-        //START LOGIC
-        if(hasPermission == false)
-        {//권한 없는 경우
             returnIntent = new Intent(getApplicationContext(), AuthorityActivity.class); //권한 설정화면
-        }
-        else if(hasPermission == true
-                && userInfoFromDb != null
-                && userInfoFromDb.androidId == deviceAndroidId
-                && userInfoFromDb.phoneNum == devicePhoneNum)
-        {//권한 있고, 자동 로그인 정보도 있는 경우
-            returnIntent = new Intent(getApplicationContext(), MainActivity.class); //자동 로그인 후 메인 화면 이동
         }
         else
         {
-            returnIntent = new Intent(getApplicationContext(), LoginActivity.class); //로그인 화면
+            //Set Variables
+            devicePhoneNum = Common.getPhoneNumber(this.getApplicationContext()); //권한 반드시 있어야 해당 값을 가져올 수 있음. READ_PHONE_STATE
+            deviceAndroidId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
+            phoneNum = SharedPrefManager.getInstance(getApplicationContext()).GetValue(SharedPrefManager.KEY_PHONE_NUM);//내부 저장소에서 저장된 폰번호(SharedPref)
+
+            if(devicePhoneNum.isEmpty() == false)
+            {
+                GetUserInfo(devicePhoneNum);//Get User Info From DB.
+                androidId = userInfoFromDb.androidId;
+            }
+            //--END
+
+            // LOGIC
+            if(userInfoFromDb != null
+               && userInfoFromDb.androidId == deviceAndroidId
+               && userInfoFromDb.phoneNum == devicePhoneNum)
+            {//권한 있고, 자동 로그인 정보도 DB에 있는 정보와 동일한 경우있는 경우
+                returnIntent = new Intent(getApplicationContext(), MainActivity.class); //자동 로그인 후 메인 화면 이동
+            }
+            else
+            {//폰 번호 바뀐경우 / 폰 리셋한경우 / 어플 지운 경우
+                returnIntent = new Intent(getApplicationContext(), LoginActivity.class); //로그인 화면
+            }
         }
 
         return returnIntent;
