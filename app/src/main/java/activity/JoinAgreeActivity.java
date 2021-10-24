@@ -1,8 +1,6 @@
 package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -10,16 +8,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import co.kr.freemon.R;
-import common.Common;
 import common.CommonConst;
-import common.ExpandableListAdapter;
+import common.VolleySingleton;
+import item.UserInfo;
 
 public class JoinAgreeActivity extends AppCompatActivity {
 
@@ -32,8 +43,10 @@ public class JoinAgreeActivity extends AppCompatActivity {
 
     Dialog textViewDialog;
 
-    String agreeProfile;
-    String agreeService;
+    String agreeProfileContent;
+    String agreeServiceContent;
+
+    Map<String, String> agreeContextList = new HashMap<String, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +55,7 @@ public class JoinAgreeActivity extends AppCompatActivity {
 
         InitializeView();
         SetListener();
+        SetAgreementContent();
     }
 
     public void InitializeView()
@@ -122,12 +136,13 @@ public class JoinAgreeActivity extends AppCompatActivity {
         if(id == R.id.join_agree_btnseeProfileContent)
         {
             txtViewDialogTitle.setText(R.string.join_agree_profile);
-//            txtMainView.setText(R.string.join_agree_profileContent);
+
+            txtMainView.setText(agreeContextList.get("JOIN_AGREE_SERVICE_CONTENT"));
         }
         else if(id == R.id.join_agree_btnseeServiceContent)
         {
             txtViewDialogTitle.setText(R.string.join_agree_service);
-//            txtMainView.setText(R.string.join_agree_serviceContent);
+            txtMainView.setText(agreeContextList.get("JOIN_AGREE_PROFILE_CONTENT"));
         }
 
         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -139,5 +154,54 @@ public class JoinAgreeActivity extends AppCompatActivity {
         });
 
     }
+
+    public void SetAgreementContent()
+    {
+        //서버의 loadDBtoJson.php파일에 접속하여 (DB데이터들)결과 받기
+        //Volley+ 라이브러리 사용
+
+        //서버주소
+        //결과를 JsonArray 받을 것이므로..
+        //StringRequest가 아니라..JsonArrayRequest를 이용할 것임
+        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.POST, CommonConst.Url.COMMON_JOIN_AGREE_CONTENT, null, new Response.Listener<JSONArray>()
+        {
+            //volley 라이브러리의 GET방식은 버튼 누를때마다 새로운 갱신 데이터를 불러들이지 않음. 그래서 POST 방식 사용
+            @Override
+            public void onResponse(JSONArray response)
+            {
+                try
+                {
+                    for(int i=0;i<response.length();i++)
+                    {
+                        JSONObject jsonObject= response.getJSONObject(i);
+
+                        String id = jsonObject.getString("ID");
+                        String content = jsonObject.getString("CONTENT");
+
+                        agreeContextList.put(id, content);
+                    }
+                } catch (JSONException e) {e.printStackTrace();}
+
+            }
+        },
+                new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(JoinAgreeActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError
+            {
+                Map<String, String> params = new HashMap<>();
+                params.put("TYPE", "AGREE_CONTENT");
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
+    }
+
 
 }

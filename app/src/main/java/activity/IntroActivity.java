@@ -1,12 +1,9 @@
 package activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +13,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +21,6 @@ import java.util.Map;
 import common.Common;
 import common.CommonConst;
 import co.kr.freemon.R;
-import common.DbRequest;
 import common.SharedPrefManager;
 import common.VolleySingleton;
 import item.UserInfo;
@@ -33,7 +28,13 @@ import item.UserInfo;
 public class IntroActivity extends AppCompatActivity {
     private SharedPreferences pref;
 
-    UserInfo userInfoFromDb = null;
+    UserInfo userInfoFromDb = new UserInfo();
+
+    //Intent returnIntent;
+    String devicePhoneNum = "";
+    String deviceAndroidId = "";
+    String phoneNum = "";
+    String androidId = "";
 
     //요청할 권한들 배열로 선언
     private String[] PERMISSIONS =
@@ -48,65 +49,70 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        CheckPermission();
+        Initialize();
+    }
+
+    private void CheckPermission()
+    {
+        if(Common.CheckPermission(this, CommonConst.Permission.PERMISSION_CAMERA) == false
+           || Common.CheckPermission(this, CommonConst.Permission.PERMISSION_PHONE_STATE) == false)
+        {
+            Intent authorityIntent  = new Intent(getApplicationContext(), AuthorityActivity.class); //권한 설정화면
+            finish();
+            startActivity(authorityIntent);
+        }
+    }
+
+    private void Initialize()
+    {
+        devicePhoneNum = Common.getPhoneNumber(this.getApplicationContext()); //권한 반드시 있어야 해당 값을 가져올 수 있음. READ_PHONE_STATE
+        deviceAndroidId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
+        phoneNum = SharedPrefManager.getInstance(getApplicationContext()).GetValue(SharedPrefManager.KEY_PHONE_NUM);//내부 저장소에서 저장된 폰번호(SharedPref)
+
+        if(devicePhoneNum.isEmpty() == false)
+        {//Set variable data -> userInfoFromDb
+            SetUserInfo(devicePhoneNum);
+        }
+    }
+
+    private void ResponseUserInfo()
+    {
         Intent intent= GetNextActivityIntent();
 
         if (intent != null)
         {//로그인, 권한체크, 메인 화면 중에 하나로 이동.
-            finish();
-            startActivity(intent);
+          finish();
+          startActivity(intent);
         }
         else
         {
-            Toast.makeText(this.getApplicationContext(),"관리자에게 문의 바랍니다.", Toast.LENGTH_LONG).show();
+          Toast.makeText(this.getApplicationContext(),"관리자에게 문의 바랍니다.", Toast.LENGTH_LONG).show();
         }
     }
 
     private Intent GetNextActivityIntent()
     {
         Intent returnIntent;
-        String devicePhoneNum = "";
-        String deviceAndroidId = "";
-        String phoneNum = "";
-        String androidId = "";
 
-        if(Common.CheckPermission(this, CommonConst.Permission.PERMISSION_CAMERA) == false
-           || Common.CheckPermission(this, CommonConst.Permission.PERMISSION_PHONE_STATE) == false)
-        {
-            returnIntent = new Intent(getApplicationContext(), AuthorityActivity.class); //권한 설정화면
+        if(userInfoFromDb != null
+           && userInfoFromDb.androidId == deviceAndroidId
+           && userInfoFromDb.phoneNum == devicePhoneNum)
+        {//권한 있고, 자동 로그인 정보도 DB에 있는 정보와 동일한 경우있는 경우
+            returnIntent = new Intent(getApplicationContext(), MainActivity.class); //자동 로그인 후 메인 화면 이동
+            Toast.makeText(getApplicationContext(), "SECOND:" + userInfoFromDb.androidId, Toast.LENGTH_SHORT).show();
         }
         else
-        {
-            //Set Variables
-            devicePhoneNum = Common.getPhoneNumber(this.getApplicationContext()); //권한 반드시 있어야 해당 값을 가져올 수 있음. READ_PHONE_STATE
-            deviceAndroidId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
-            phoneNum = SharedPrefManager.getInstance(getApplicationContext()).GetValue(SharedPrefManager.KEY_PHONE_NUM);//내부 저장소에서 저장된 폰번호(SharedPref)
-
-            if(devicePhoneNum.isEmpty() == false)
-            {
-                GetUserInfo(devicePhoneNum);//Get User Info From DB.
-                androidId = userInfoFromDb.androidId;
-            }
-            //--END
-
-            // LOGIC
-            if(userInfoFromDb != null
-               && userInfoFromDb.androidId == deviceAndroidId
-               && userInfoFromDb.phoneNum == devicePhoneNum)
-            {//권한 있고, 자동 로그인 정보도 DB에 있는 정보와 동일한 경우있는 경우
-                returnIntent = new Intent(getApplicationContext(), MainActivity.class); //자동 로그인 후 메인 화면 이동
-            }
-            else
-            {//폰 번호 바뀐경우 / 폰 리셋한경우 / 어플 지운 경우
-                returnIntent = new Intent(getApplicationContext(), LoginActivity.class); //로그인 화면
-            }
+        {//폰 번호 바뀐경우 / 폰 리셋한경우 / 어플 지운 경우
+            returnIntent = new Intent(getApplicationContext(), LoginActivity.class); //로그인 화면
         }
 
         return returnIntent;
 
         //storing the user in shared preferences
-        ///if(userInfo != null && userInfo.phoneNum.isEmpty() == false)
+        //if(userInfo != null && userInfo.phoneNum.isEmpty() == false)
         //{
-        //  SharedPrefManager.getInstance(getApplicationContext()).SetValue(SharedPrefManager.KEY_PHONE_NUM, userInfo.phoneNum);
+          //SharedPrefManager.getInstance(getApplicationContext()).SetValue(SharedPrefManager.KEY_PHONE_NUM, userInfo.phoneNum);
         //}
 
         //starting the profile activity
@@ -151,7 +157,7 @@ public class IntroActivity extends AppCompatActivity {
         //else { returnIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); }
     }
 
-    private void GetUserInfo(String phoneNum)
+    private void SetUserInfo(String phoneNum)
     {
         ProgressBar progressBar;
         UserInfo returnInfo;
@@ -162,56 +168,56 @@ public class IntroActivity extends AppCompatActivity {
         }
 
         //if everything is fine
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, DbRequest.UrlConst.SELECT_TB_USER,
-                new Response.Listener<String>()
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, CommonConst.Url.SELECT_TB_USER, new Response.Listener<String>()
+            {
+                @Override
+                public void onResponse(String response)
                 {
-                    @Override
-                    public void onResponse(String response)
+                    try
                     {
-                        try
+                        //converting response to json object
+                        JSONObject obj = new JSONObject(response);
+
+                        //if no error in response
+                        if (obj.getBoolean("error") == false)
                         {
-                            //converting response to json object
-                            JSONObject obj = new JSONObject(response);
+                            //getting the user from the response
+                            JSONObject userJson = obj.getJSONObject("user");
 
-                            //if no error in response
-                            if (!obj.getBoolean("error"))
-                            {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            //creating a new user object
+                            UserInfo returnInfo = new UserInfo();
+                            returnInfo.phoneNum = userJson.getString("PHONE_NUM");
+                            returnInfo.name = userJson.getString("NAME");
+                            returnInfo.gender = userJson.getString("GENDER");
+                            returnInfo.berth = userJson.getString("BERTH");
+                            returnInfo.profilePic = userJson.getString("PROFILE_PIC");
+                            returnInfo.targetCity = userJson.getString("TARGET_CITY");
+                            returnInfo.recQuestion = userJson.getString("REC_QUESTION");
+                            returnInfo.recAnswer = userJson.getString("REC_ANSWER");
+                            returnInfo.androidId = userJson.getString("ANDROID_ID");
+                            userInfoFromDb = returnInfo; //Set User Info From DB
 
-                                //getting the user from the response
-                                JSONObject userJson = obj.getJSONObject("user");
-
-                                //creating a new user object
-                                UserInfo returnInfo = new UserInfo();
-                                returnInfo.phoneNum = userJson.getString("phone_num");
-                                returnInfo.name = userJson.getString("name");
-                                returnInfo.gender = userJson.getString("gender");
-                                returnInfo.berth = userJson.getString("berth");
-                                returnInfo.profilePic = userJson.getString("profile_pic");
-                                returnInfo.targetCity = userJson.getString("target_city");
-                                returnInfo.recQuestion = userJson.getString("rec_question");
-                                returnInfo.recAnswer = userJson.getString("rec_answer");
-
-                                userInfoFromDb = returnInfo; //Set User Info From DB
-                            }
-                            else
-                            {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                            }
+                            ResponseUserInfo();
                         }
-                        catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                        }
+                        //else
+                        //{
+                            //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        //}
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
                     }
-                })
+                }
+            },
+            new Response.ErrorListener()
+            {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        )
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError
