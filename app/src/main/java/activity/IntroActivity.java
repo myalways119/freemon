@@ -22,7 +22,6 @@ import common.Common;
 import common.CommonConst;
 import co.kr.freemon.R;
 import common.SharedPrefManager;
-import common.VolleySingleton;
 import item.UserInfo;
 
 public class IntroActivity extends AppCompatActivity {
