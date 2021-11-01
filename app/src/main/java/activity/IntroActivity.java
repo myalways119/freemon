@@ -8,12 +8,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -50,6 +44,7 @@ public class IntroActivity extends AppCompatActivity {
 
         CheckPermission();
         Initialize();
+        ResponseUserInfo();
     }
 
     private void CheckPermission()
@@ -158,75 +153,6 @@ public class IntroActivity extends AppCompatActivity {
 
     private void SetUserInfo(String phoneNum)
     {
-        ProgressBar progressBar;
-        UserInfo returnInfo;
 
-        if (phoneNum.isEmpty() == true)
-        {
-            return;
-        }
-
-        //if everything is fine
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, CommonConst.Url.SELECT_TB_USER, new Response.Listener<String>()
-            {
-                @Override
-                public void onResponse(String response)
-                {
-                    try
-                    {
-                        //converting response to json object
-                        JSONObject obj = new JSONObject(response);
-
-                        //if no error in response
-                        if (obj.getBoolean("error") == false)
-                        {
-                            //getting the user from the response
-                            JSONObject userJson = obj.getJSONObject("user");
-
-                            //creating a new user object
-                            UserInfo returnInfo = new UserInfo();
-                            returnInfo.phoneNum = userJson.getString("PHONE_NUM");
-                            returnInfo.name = userJson.getString("NAME");
-                            returnInfo.gender = userJson.getString("GENDER");
-                            returnInfo.berth = userJson.getString("BERTH");
-                            returnInfo.profilePic = userJson.getString("PROFILE_PIC");
-                            returnInfo.targetCity = userJson.getString("TARGET_CITY");
-                            returnInfo.recQuestion = userJson.getString("REC_QUESTION");
-                            returnInfo.recAnswer = userJson.getString("REC_ANSWER");
-                            returnInfo.androidId = userJson.getString("ANDROID_ID");
-                            userInfoFromDb = returnInfo; //Set User Info From DB
-
-                            ResponseUserInfo();
-                        }
-                        //else
-                        //{
-                            //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                        //}
-                    }
-                    catch (JSONException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-            },
-            new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        )
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError
-            {
-                Map<String, String> params = new HashMap<>();
-                params.put("PHONE_NUM", phoneNum);
-                return params;
-            }
-        };
-
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 }

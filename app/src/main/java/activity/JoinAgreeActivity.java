@@ -5,27 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import co.kr.freemon.R;
-import common.CommonConst;
+import http.ApiClient;
+import http.ApiInterface;
+import item.LargeContent;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class JoinAgreeActivity extends AppCompatActivity {
 
@@ -41,7 +38,7 @@ public class JoinAgreeActivity extends AppCompatActivity {
     String agreeProfileContent;
     String agreeServiceContent;
 
-    Map<String, String> agreeContextList = new HashMap<String, String>();
+    Map<String, String> agreeContentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,7 @@ public class JoinAgreeActivity extends AppCompatActivity {
 
         InitializeView();
         SetListener();
-        SetAgreementContent();
+        GetAgreementContent();
     }
 
     public void InitializeView()
@@ -132,12 +129,12 @@ public class JoinAgreeActivity extends AppCompatActivity {
         {
             txtViewDialogTitle.setText(R.string.join_agree_profile);
 
-            txtMainView.setText(agreeContextList.get("JOIN_AGREE_SERVICE_CONTENT"));
+            txtMainView.setText(agreeContentList.get("JOIN_AGREE_SERVICE_CONTENT"));
         }
         else if(id == R.id.join_agree_btnseeServiceContent)
         {
             txtViewDialogTitle.setText(R.string.join_agree_service);
-            txtMainView.setText(agreeContextList.get("JOIN_AGREE_PROFILE_CONTENT"));
+            txtMainView.setText(agreeContentList.get("JOIN_AGREE_PROFILE_CONTENT"));
         }
 
         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -150,53 +147,32 @@ public class JoinAgreeActivity extends AppCompatActivity {
 
     }
 
-    public void SetAgreementContent()
+    public void GetAgreementContent()
     {
-        //서버의 loadDBtoJson.php파일에 접속하여 (DB데이터들)결과 받기
-        //Volley+ 라이브러리 사용
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<List<LargeContent>> call = apiInterface.selectLargeContent("AGREE_CONTENT");
 
-        //서버주소
-        //결과를 JsonArray 받을 것이므로..
-        //StringRequest가 아니라..JsonArrayRequest를 이용할 것임
-        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.POST, CommonConst.Url.COMMON_JOIN_AGREE_CONTENT, null, new Response.Listener<JSONArray>()
-        {
-            //volley 라이브러리의 GET방식은 버튼 누를때마다 새로운 갱신 데이터를 불러들이지 않음. 그래서 POST 방식 사용
+        call.enqueue(new Callback<List<LargeContent>>() {
             @Override
-            public void onResponse(JSONArray response)
-            {
-                try
-                {
-                    for(int i=0;i<response.length();i++)
-                    {
-                        JSONObject jsonObject= response.getJSONObject(i);
+            public void onResponse(Call<List<LargeContent>> call, Response<List<LargeContent>> response) {
+                if( response.isSuccessful()){
+                    List<LargeContent> mList = response.body();
 
-                        String id = jsonObject.getString("ID");
-                        String content = jsonObject.getString("CONTENT");
-
-                        agreeContextList.put(id, content);
+                    //String result ="";
+                    for( LargeContent item : mList){
+                        //result += "title : " + item.getId() + " text: " + item.getContent()+ "\n";
+                        agreeContentList.put(item.getId(),item.getContent());
                     }
-                } catch (JSONException e) {e.printStackTrace();}
+                    //mListTv.setText(result);
+                }else {
+                    Log.d("GetAgreementContent","Status Code : " + response.code());
+                }
+            }
 
-            }
-        },
-                new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(JoinAgreeActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<LargeContent>> call, Throwable t) {
+                Log.d("GetAgreementContent","Fail msg : " + t.getMessage());
             }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError
-            {
-                Map<String, String> params = new HashMap<>();
-                params.put("TYPE", "AGREE_CONTENT");
-                return params;
-            }
-        };
-
-        VolleySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
+        });
     }
-
-
 }
